@@ -6,3 +6,13 @@ define [
 ], ($, _, Backbone, JST) ->
   class ActivityView extends Backbone.View
     template: JST['app/scripts/templates/activity.hbs']
+
+    tagName: 'li'
+
+    initialize: ->
+        _.bindAll @
+
+    render: ->
+        $(@el).html "<span>#{@model.get 'actor_type'}</span>"
+
+        @

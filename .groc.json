@@ -1,0 +1,6 @@
+{
+  "glob": ["app/scripts/**/*.coffee", "README.md", "app/styles/**/*.css", "app/scripts/templates/**/*.hbs"],
+  "github": false,
+  "out": "./docs",
+  "verbose": true
+}
