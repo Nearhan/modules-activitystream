@@ -6,3 +6,119 @@ body {
     margin: 50px auto 0 auto;
     width: 300px;
 }
+
+/* CSS for activity streams */
+.activitystream {
+    font: normal 13px/18px Arial, Helvetica, sans-serif;
+}
+
+.activitystream__list {
+    list-style: none;
+}
+
+.activitystream__image--small {
+    width: 240px;
+    height: 240px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #cfcfcf;
+}
+
+.activitystream__item--small {
+    float: left;
+    border: 1px solid #cfcfcf;   
+    margin: 0px 0px 5px 5px;
+    padding: 0;
+}
+
+.activitystream__count--small {
+    list-style: none outside;
+    padding: 0;
+}
+
+.activitystream__counts--small {
+    border: 0;
+    background-color:grey;
+    color: #fff;
+    position: absolute;
+    top: 8px;
+    height: 25px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding-right: 7px;
+    padding-top: 6px;
+    padding-left: 6px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.activitystream__counts__favorite__icon--small {
+    background: url("http://yourshot.nationalgeographic.com/static/img/icons/photo-icons.png") no-repeat -18px 0;
+    width: 16px;
+    height: 14px;
+    float: left;
+}
+
+.activitystream__counts__comment__icon--small {
+    background: url("http://yourshot.nationalgeographic.com/static/img/icons/photo-icons.png") no-repeat -36px 0;
+    width: 16px;
+    height: 14px;
+    float: left;
+}
+
+.activitystream__meta--small {
+    display: block;
+    position: relative;
+    color: #808080;
+    background-color: #fff;
+    text-align: left;
+    vertical-align: baseline;
+    width: 222px;
+    padding: 0 10px 10px 10px;
+    margin: 0;
+    border: 0;
+    height: 100px;
+}
+
+.activitystream__meta--small a:link {
+    color: #0078B0;
+}
+
+.activitystream__meta--small:before {
+    bottom: 105%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(199,199,199,0);
+    border-bottom-color: #c7c7c7;
+    border-width: 11px;
+    left: 13%;
+    margin-left: -11px;
+}
+
+.activitystream__meta--small:after {
+    bottom: 105%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255,255,255,0);
+    border-bottom-color: #fff;
+    border-width: 10px;
+    left: 13%;
+    margin-left: -10px;
+}
+
+.activitystream__item {
+    
+}
+
+.activitystream__image {
+
+}
