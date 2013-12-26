@@ -46,6 +46,7 @@
 .activitystream__count {
     list-style: none outside;
     padding: 0;
+    position: relative;
 }
 
 .activitystream__counts {
@@ -61,8 +62,7 @@
     padding-right: 7px;
     padding-top: 6px;
     padding-left: 6px;
-    margin-top: 10px;
-    margin-left: 5px;
+    margin-left: 7px;
 }
 
 .activitystream__counts__favorite__icon {
