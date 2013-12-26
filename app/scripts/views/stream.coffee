@@ -9,9 +9,7 @@ define [
 ], ($, _, Backbone, JST, StreamCollection, ActivityModel, ActivityView) ->
   class StreamView extends Backbone.View
     template: JST['app/scripts/templates/stream.hbs']
-    # tagName: 'div'
-    # className: 'activity-stream'
-    el: $ 'body'
+    el: $ 'div.activitystream'
 
     initialize: ->
         _.bindAll @
@@ -22,7 +20,6 @@ define [
         @render()
 
     render: ->
-        $(@el).append '<button>Add an Activity</button>'
         $(@el).append @template
 
     page: ->
@@ -32,7 +29,7 @@ define [
         activity = new ActivityModel
         activity.set actor_type: "#{activity.get 'actor'}"
         activity_view = new ActivityView model: activity
-        $(@el).append activity_view.render().el
+        $(@el).find('ul.activitystream__list').append activity_view.render().el
 
     events:
         'click .activity.show--more': 'page'
