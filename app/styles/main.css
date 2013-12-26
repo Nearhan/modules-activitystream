@@ -1,7 +1,7 @@
-body {
+/*body {
     background: #fafafa;
 }
-
+*/
 .hero-unit {
     margin: 50px auto 0 auto;
     width: 300px;
@@ -10,10 +10,14 @@ body {
 /* CSS for activity streams */
 .activitystream {
     font: normal 13px/18px Arial, Helvetica, sans-serif;
+    padding: 10px;
 }
 
 .activitystream__list {
     list-style: none;
+    background: rgba(0,0,0,0.05);
+    border: 1px solid #cfcfcf;
+    display: block;
 }
 
 .activitystream__image--small {
@@ -24,19 +28,27 @@ body {
     border: 1px solid #cfcfcf;
 }
 
-.activitystream__item--small {
+.activitystream__image--large {
+    width: 480px;
+    height: 480px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #cfcfcf;
+}
+
+.activitystream__item {
     float: left;
     border: 1px solid #cfcfcf;   
-    margin: 0px 0px 5px 5px;
+    margin: 20px 0px 5px 10px;
     padding: 0;
 }
 
-.activitystream__count--small {
+.activitystream__count {
     list-style: none outside;
     padding: 0;
 }
 
-.activitystream__counts--small {
+.activitystream__counts {
     border: 0;
     background-color:grey;
     color: #fff;
@@ -53,21 +65,21 @@ body {
     margin-left: 5px;
 }
 
-.activitystream__counts__favorite__icon--small {
+.activitystream__counts__favorite__icon {
     background: url("http://yourshot.nationalgeographic.com/static/img/icons/photo-icons.png") no-repeat -18px 0;
     width: 16px;
     height: 14px;
     float: left;
 }
 
-.activitystream__counts__comment__icon--small {
+.activitystream__counts__comment__icon {
     background: url("http://yourshot.nationalgeographic.com/static/img/icons/photo-icons.png") no-repeat -36px 0;
     width: 16px;
     height: 14px;
     float: left;
 }
 
-.activitystream__meta--small {
+.activitystream__meta {
     display: block;
     position: relative;
     color: #808080;
@@ -81,11 +93,11 @@ body {
     height: 100px;
 }
 
-.activitystream__meta--small a:link {
+.activitystream__meta a:link {
     color: #0078B0;
 }
 
-.activitystream__meta--small:before {
+.activitystream__meta:before {
     bottom: 105%;
     border: solid transparent;
     content: " ";
@@ -100,7 +112,7 @@ body {
     margin-left: -11px;
 }
 
-.activitystream__meta--small:after {
+.activitystream__meta:after {
     bottom: 105%;
     border: solid transparent;
     content: " ";
@@ -115,10 +127,29 @@ body {
     margin-left: -10px;
 }
 
-.activitystream__item {
-    
+/**
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
 }
 
-.activitystream__image {
+.cf:after {
+    clear: both;
+}
 
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
 }
