@@ -13,6 +13,6 @@ define [
         _.bindAll @
 
     render: ->
-        $(@el).html "<span>#{@model.get 'actor_type'}</span>"
+        $(@el).html @template(@model.toJSON())
 
         @

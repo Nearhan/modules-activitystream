@@ -23,7 +23,7 @@ define [
 
     render: ->
         $(@el).append '<button>Add an Activity</button>'
-        $(@el).append '<ul><li>Hello, Backbone!</li></ul>'
+        $(@el).append @template
 
     page: ->
         console.log('asked for more items')
