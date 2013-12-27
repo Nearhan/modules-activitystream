@@ -46,12 +46,13 @@ module.exports = function (grunt) {
                 },
                 files: [
                     '<%= yeoman.app %>/*.html',
-                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
+                    '{.tmp,<%= yeoman.app %>}/styles/scss/{,*/}*.scss',
                     '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
                     '<%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs}',
                     'test/spec/**/*.js'
-                ]
+                ],
+                tasks: ['sass:dist']
             },
             handlebars: {
                 files: [
@@ -282,6 +283,18 @@ module.exports = function (grunt) {
                         '/styles/fonts/{,*/}*.*',
                     ]
                 }
+            }
+        },
+        sass: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.app %>/styles/scss/',
+                    src: ['*.scss'],
+                    dest: '.tmp/styles/css/',
+                    ext: '.css'
+
+                }]
             }
         }
     });

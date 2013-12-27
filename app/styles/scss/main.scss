@@ -33,7 +33,7 @@
     height: 740px;
     margin: 0;
     padding: 0;
-    border: 1px solid #cfcfcf;
+    border: 5px dashed #cfcfcf;
 }
 
 .activitystream__item {
@@ -73,6 +73,19 @@
     float: left;
 }
 
+.activitystream__badge__image {
+    width: 32px;
+    height: auto;
+    border: 1px solid red;
+
+}
+.activitystream__clock {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    display: block;
+
+}
 .activitystream__counts__comment__icon {
     background: url("http://yourshot.nationalgeographic.com/static/img/icons/photo-icons.png") no-repeat -36px 0;
     width: 16px;
@@ -81,19 +94,19 @@
 }
 
 .activitystream__counts__favorite__count {
-	float: left;
-	line-height: 1.5;
-	font-size: 11px;
-	margin-left: 5px;
-	margin-right: 5px;
+    float: left;
+    line-height: 1.5;
+    font-size: 11px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .activitystream__counts__comment__count {
-	float: left;
-	line-height: 1.5;
-	font-size: 11px;
-	margin-left: 5px;
-	margin-right: 5px;
+    float: left;
+    line-height: 1.5;
+    font-size: 11px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .activitystream__meta {
