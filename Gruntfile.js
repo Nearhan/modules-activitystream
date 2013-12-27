@@ -322,6 +322,7 @@ module.exports = function (grunt) {
         grunt.task.run([
             'clean:server',
             'coffee:dist',
+            'sass:dist',
             'createDefaultTemplate',
             'handlebars',
             'connect:livereload',
@@ -342,6 +343,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'coffee',
+        'sass:dist',
         'createDefaultTemplate',
         'handlebars',
         'useminPrepare',
