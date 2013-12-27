@@ -8,7 +8,7 @@ define [
     template: JST['app/scripts/templates/activity.hbs']
 
     tagName: 'li'
-    
+
     className: 'activitystream__item'
 
     initialize: ->

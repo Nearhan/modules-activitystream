@@ -34,6 +34,3 @@ define [
     events:
         'click .activity.show--more': 'page'
         'click button': 'appendActivity'
-
-
-  stream_view = new StreamView
