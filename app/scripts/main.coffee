@@ -13,21 +13,27 @@ require.config
       exports: 'Backbone'
     handlebars:
       exports: 'Handlebars'
+    sailsio:
+      deps: [
+        'io'
+      ]
+      exports: 'io'
   paths:
     jquery: '../bower_components/jquery/jquery'
     backbone: '../bower_components/backbone/backbone'
     underscore: '../bower_components/underscore/underscore'
     handlebars: '../bower_components/handlebars/handlebars'
+    io: '/scripts/vendor/socket.io/socket.io'
+    sailsio: '/scripts/vendor/sails.io/sails.io'
     models: '/scripts/models'
     views: '/scripts/views'
     collections: '/scripts/collections'
     modules: '/scripts/modules'
-    as: 'http://modernistic-test2.nationalgeographic.com/as'
 
 require [
   'backbone'
   'jquery'
-  'as/js/socket.io'
+  'sailsio'
   'config'
   'modules/logger'
   'views/stream'
@@ -46,8 +52,8 @@ require [
 
   socket.on "connect", socketConnected = ->
     logger.log "Connected;"
-    # socket.get '/api/v1/mmdb_user/1', (data) ->
-    #     logger.log data
+    socket.get '/api/v1/mmdb_user/1/FAVORITED', (data) ->
+        logger.log data
 
   # Different socket events will probably have to be handled
   # in a module that gets instantiated here
