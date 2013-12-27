@@ -33,6 +33,7 @@ require.config
 require [
   'backbone'
   'jquery'
+  'underscore'
   'sailsio'
   'config'
   'modules/logger'
@@ -40,20 +41,25 @@ require [
   'models/activity'
   'views/activity'
   'collections/stream'
-], (Backbone, $, io, config, Logger, StreamView) ->
+], (Backbone, $, _, io, config, Logger, StreamView) ->
   Backbone.history.start()
 
   # Base Init
   logger = new Logger()
 
+  # Will have to figure out how to get a AS cookie before we fire everything else
+
+  # Stream Module Init
+  stream = new StreamView()
+
   # Init Socket Connection
-  logger.log "Connecting to Activity Streams Service..."
   socket = io.connect(config.activityStreamServiceAPI)
 
   socket.on "connect", socketConnected = ->
-    logger.log "Connected;"
+    stream.ready()
     socket.get '/api/v1/mmdb_user/1/FAVORITED', (data) ->
-        logger.log data
+        _.each data, stream.appendActivity
+
 
   # Different socket events will probably have to be handled
   # in a module that gets instantiated here
@@ -65,5 +71,5 @@ require [
         #   hearts = $("#" + m + " i")
         #   $("a").find(hearts).toggleClass "chosen"
 
-  # Stream Module Init
-  stream = new StreamView()
+
+
