@@ -72,6 +72,18 @@
     float: left;
 }
 
+.activitystream__counts__favorite__count {
+	float: left;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.activitystream__counts__comment__count {
+	float: left;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
 .activitystream__counts__comment__icon {
     background: url("http://yourshot.nationalgeographic.com/static/img/icons/photo-icons.png") no-repeat -36px 0;
     width: 16px;
