@@ -28,9 +28,11 @@ define [
     ready: ->
         $(@el).find('div.activitystream__pending').remove()
 
-    appendActivity: (activity) ->
+    addActivity: (activity) ->
         activity = new ActivityModel(activity)
-        window.activityModel = activity
+        @collection.add activity
+
+    appendActivity: (activity) ->
         activity_view = new ActivityView model: activity
         $(@el).find('ul.activitystream__list').append activity_view.render().el
 

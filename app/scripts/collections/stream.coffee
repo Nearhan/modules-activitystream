@@ -6,3 +6,4 @@ define [
 
   class StreamCollection extends Backbone.Collection
     model: ActivityModel
+    url: '/stream/'

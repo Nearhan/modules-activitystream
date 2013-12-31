@@ -58,7 +58,7 @@ require [
   socket.on "connect", socketConnected = ->
     stream.ready()
     socket.get '/api/v1/mmdb_user/1/FAVORITED', (data) ->
-        _.each data, stream.appendActivity
+        _.each data, stream.addActivity
 
 
   # Different socket events will probably have to be handled
