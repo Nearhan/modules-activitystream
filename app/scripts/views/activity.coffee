@@ -12,6 +12,8 @@ define [
     className: 'activitystream__item'
 
     initialize: ->
+        console.log @model.toJSON()
+        window.activityView = this
         _.bindAll @
 
     render: ->

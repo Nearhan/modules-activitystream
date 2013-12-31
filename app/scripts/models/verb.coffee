@@ -5,5 +5,3 @@ define [
   'use strict';
 
   class VerbModel extends Backbone.Model
-    defaults:
-        type: 'VERBED'

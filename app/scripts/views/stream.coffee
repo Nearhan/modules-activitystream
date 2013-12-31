@@ -30,7 +30,7 @@ define [
 
     appendActivity: (activity) ->
         activity = new ActivityModel(activity)
-        activity.set actor_type: "#{activity.get 'actor'}"
+        window.activityModel = activity
         activity_view = new ActivityView model: activity
         $(@el).find('ul.activitystream__list').append activity_view.render().el
 
