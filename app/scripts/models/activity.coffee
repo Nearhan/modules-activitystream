@@ -1,14 +1,17 @@
 define [
   'underscore'
+  'jquery'
   'backbone'
   'models/actor'
   'models/verb'
   'models/object'
-], (_, Backbone, ActorModel, VerbModel, ObjectModel) ->
+], (_, $, Backbone, ActorModel, VerbModel, ObjectModel) ->
   'use strict';
 
   class ActivityModel extends Backbone.Model
       # Will have to remove these defaults once we're set up
+    dfd: new $.Deferred()
+
     models:
       actor: null
       verb: null
@@ -20,7 +23,9 @@ define [
       @models.actor = new ActorModel(arguments[0].actor)
       @models.verb = new VerbModel(arguments[0].verb)
       @models.object = new ObjectModel(arguments[0].object)
-      window.model = this
+      @grab(@dfd)
+      window.models = @models
+      window.activity = @
 
     parse: (response) ->
       for key of @model
@@ -32,16 +37,13 @@ define [
       response
 
     grab: ->
-      _.each @models, (value, key, list) ->
-        # type = value.get('data').type
-        api = 'http://mc.dev.nationalgeographic.com:8000/user/1/' # value.get('data')[type + '_api']
-        $.ajax(
-          url: api
-          type: "GET"
-          dataType: "json"
-          xhrFields:
-            withCredentials: true
-        ).done (data) ->
-          value.set data
+        $.when(@models.actor.fetch(), @models.object.fetch()).then(@dfd.resolve)
 
-        console.log value, key
+    toJSON: ->
+        obj = {}
+        obj.actor = @models.actor.attributes
+        obj.object = @models.object.attributes
+        obj.verb = @models.verb.attributes
+        return obj
+
+

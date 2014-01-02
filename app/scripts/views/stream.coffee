@@ -10,6 +10,7 @@ define [
   class StreamView extends Backbone.View
     template: JST['app/scripts/templates/stream.hbs']
     el: $ 'div.activitystream'
+    self: @
 
     initialize: ->
         _.bindAll @
@@ -29,10 +30,13 @@ define [
         $(@el).find('div.activitystream__pending').remove()
 
     addActivity: (activity) ->
-        activity = new ActivityModel(activity)
-        @collection.add activity
+        activity.collection = @collection
+        activityModel = new ActivityModel(activity)
+        $.when(activityModel.dfd).done (activityModel) ->
+            activityModel.collection.add activityModel
 
     appendActivity: (activity) ->
+        console.log 'appending', activity.attributes.actor
         activity_view = new ActivityView model: activity
         $(@el).find('ul.activitystream__list').append activity_view.render().el
 

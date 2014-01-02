@@ -1,24 +1,22 @@
 define [
   'underscore'
   'backbone'
-], (_, Backbone) ->
+  'config'
+], (_, Backbone, config) ->
   'use strict';
 
   class ComponentModel extends Backbone.Model
 
-  	defaults: 
-  		apiKey: 'test'
-
   	initialize: ->
-  		@url = '/component/'
+        @type = @get('data').type
 
-  	fetch: ->
-        api = 'http://mc.dev.nationalgeographic.com:8000/user/1/' # value.get('data')[type + '_api']
-        $.ajax(
-          url: api
-          type: "GET"
-          dataType: "json"
-          xhrFields:
-            withCredentials: true
-        ).done (results) ->
-          set results
+    url: ->
+        return @get('data')[@type + '_api']
+
+    fetch: ->
+      options = {}
+      if config.api[@type]
+        options = config.api[@type]
+      else
+        options.xhrFields = withCredentials: true # Should this be default?
+      Backbone.Model::fetch.call @, options

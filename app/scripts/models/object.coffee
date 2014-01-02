@@ -7,5 +7,4 @@ define [
 
   class ObjectModel extends ComponentModel
 
-  	initialize: ->
-  		@fetch()
+

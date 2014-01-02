@@ -12,11 +12,12 @@ define [
     className: 'activitystream__item'
 
     initialize: ->
-        console.log @model.toJSON()
+        # console.log @model.toJSON()
         window.activityView = this
         _.bindAll @
 
     render: ->
+        console.log 'view', @model.toJSON()
         $(@el).html @template(@model.toJSON())
 
         @
