@@ -21,7 +21,6 @@ define [
       @models.verb = new VerbModel(arguments[0].verb)
       @models.object = new ObjectModel(arguments[0].object)
       window.model = this
-      @grab()
 
     parse: (response) ->
       for key of @model

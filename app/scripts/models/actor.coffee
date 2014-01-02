@@ -6,5 +6,6 @@ define [
   'use strict';
 
   class ActorModel extends ComponentModel
+  	
   	initialize: ->
   		console.log this
