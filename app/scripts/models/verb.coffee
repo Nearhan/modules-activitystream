@@ -1,7 +1,8 @@
 define [
   'underscore'
   'backbone'
-], (_, Backbone) ->
+  'models/component'
+], (_, Backbone, ComponentModel) ->
   'use strict';
 
-  class VerbModel extends Backbone.Model
+  class VerbModel extends ComponentModel

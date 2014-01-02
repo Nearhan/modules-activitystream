@@ -1,7 +1,10 @@
 define [
   'underscore'
   'backbone'
-], (_, Backbone) ->
+  'models/component'
+], (_, Backbone, ComponentModel) ->
   'use strict';
 
-  class ActorModel extends Backbone.Model
+  class ActorModel extends ComponentModel
+  	initialize: ->
+  		console.log this
