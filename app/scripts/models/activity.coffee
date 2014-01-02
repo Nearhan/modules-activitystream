@@ -10,7 +10,7 @@ define [
   class ActivityModel extends Backbone.Model
       # Will have to remove these defaults once we're set up
     models:
-      actor: null 
+      actor: null
       verb: null
       object: null
       target: null
@@ -34,4 +34,15 @@ define [
 
     grab: ->
       _.each @models, (value, key, list) ->
+        # type = value.get('data').type
+        api = 'http://mc.dev.nationalgeographic.com:8000/user/1/' # value.get('data')[type + '_api']
+        $.ajax(
+          url: api
+          type: "GET"
+          dataType: "json"
+          xhrFields:
+            withCredentials: true
+        ).done (data) ->
+          value.set data
+
         console.log value, key
