@@ -14,7 +14,7 @@ require [
     newDate = new Date(date)
     month = mthNames[newDate.getMonth()]
     day = newDate.getDate()
-    compiledDate = month + ' ' + day
+    compiledDate = day + ' ' + month
 
   Handlebars.registerHelper 'getBadge', (verb) ->
     switch verb
