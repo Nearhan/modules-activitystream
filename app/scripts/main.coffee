@@ -37,11 +37,12 @@ require [
   'sailsio'
   'config'
   'modules/logger'
+  'modules/activity'
   'views/stream'
   'models/activity'
   'views/activity'
   'collections/stream'
-], (Backbone, $, _, io, config, Logger, StreamView) ->
+], (Backbone, $, _, io, config, Logger, Activity, StreamView) ->
   Backbone.history.start()
 
   # Base Init
@@ -52,14 +53,21 @@ require [
   # Stream Module Init
   window.stream = new StreamView()
 
+  activity = new Activity(stream)
+
   # Init Socket Connection
   socket = io.connect(config.activityStreamServiceAPI)
 
   socket.on "connect", socketConnected = ->
+    console.log "Socket opened"
     stream.ready()
     socket.get '/api/v1/mmdb_user/1/FAVORITED', (data) ->
         _.each data, stream.addActivity
 
+    socket.post '/api/v1/subscribe', { user: 1 }
+
+    socket.on "message", messageReceived = (message) ->
+      activity.parseMessage(message.data.data, message.verb)
 
   # Different socket events will probably have to be handled
   # in a module that gets instantiated here

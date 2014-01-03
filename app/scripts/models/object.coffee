@@ -6,5 +6,3 @@ define [
   'use strict';
 
   class ObjectModel extends ComponentModel
-
-

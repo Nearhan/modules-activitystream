@@ -46,4 +46,3 @@ define [
         obj.verb = @models.verb.attributes
         return obj
 
-
