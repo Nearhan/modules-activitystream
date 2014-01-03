@@ -50,7 +50,7 @@ require [
   # Will have to figure out how to get a AS cookie before we fire everything else
 
   # Stream Module Init
-  stream = new StreamView()
+  window.stream = new StreamView()
 
   # Init Socket Connection
   socket = io.connect(config.activityStreamServiceAPI)

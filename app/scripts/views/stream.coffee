@@ -30,13 +30,12 @@ define [
         $(@el).find('div.activitystream__pending').remove()
 
     addActivity: (activity) ->
-        activity.collection = @collection
-        activityModel = new ActivityModel(activity)
-        $.when(activityModel.dfd).done (activityModel) ->
-            activityModel.collection.add activityModel
+      activityModel = new ActivityModel(activity)
+      $.when(activityModel.dfd).then($.proxy(->
+        @collection.add activityModel
+      , @))
 
     appendActivity: (activity) ->
-        console.log 'appending', activity.attributes.actor
         activity_view = new ActivityView model: activity
         $(@el).find('ul.activitystream__list').append activity_view.render().el
 

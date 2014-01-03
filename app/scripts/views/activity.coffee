@@ -17,7 +17,6 @@ define [
         _.bindAll @
 
     render: ->
-        console.log 'view', @model.toJSON()
         $(@el).html @template(@model.toJSON())
 
         @
