@@ -67,7 +67,7 @@ require [
     socket.post '/api/v1/subscribe', { user: 1 }
 
     socket.on "message", messageReceived = (message) ->
-      activity.parseMessage(message.data.data, message.verb)
+      activity.parseMessage(message, message.verb)
 
   # Different socket events will probably have to be handled
   # in a module that gets instantiated here
