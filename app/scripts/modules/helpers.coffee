@@ -15,3 +15,7 @@ require [
     month = mthNames[newDate.getMonth()]
     day = newDate.getDate()
     compiledDate = month + ' ' + day
+
+  Handlebars.registerHelper 'getBadge', (verb) ->
+    switch verb
+      when 'FAVORITED' then 'nationalGeographic_web-heart.png'
