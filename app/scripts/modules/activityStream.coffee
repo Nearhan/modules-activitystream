@@ -32,6 +32,7 @@ define [
     init = (user) ->
 
       # Base Init that loads our other modules
+      console.log '__________________________________________________'
       logger = new Logger()
 
       # Will have to figure out how to get a AS cookie before we fire everything else
