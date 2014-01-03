@@ -45,6 +45,7 @@ require [
 ], (Backbone, $, _, io, config, Logger, Activity, StreamView) ->
   Backbone.history.start()
 
+  console.log '__________________________________________________'
   # Base Init
   logger = new Logger()
 
