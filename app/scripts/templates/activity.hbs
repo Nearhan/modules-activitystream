@@ -1,12 +1,12 @@
 <ul class="activitystream__count">
     <li class="activitystream__counts">
         <a href="#"><i class="activitystream__counts__favorite__icon" ></i></a><span class="activitystream__counts__favorite__count">2</span>
-        <a href="#"><i class="activitystream__counts__comment__icon" ></i></a><span class="activitystream__counts__comment__count">2</span>
+        <a href="http://yourshot-uat.nationalgeographic.com{{ object.absolute_url }}"><i class="activitystream__counts__comment__icon" ></i></a><span class="activitystream__counts__comment__count">2</span>
     </li>
 </ul>
-<a href="#"><img src="http://distilleryimage10.ak.instagram.com/dd891c066aa411e381b912d0d6d4b1ee_8.jpg" class="activitystream__image--small" /></a>
+<a href="http://yourshot-uat.nationalgeographic.com{{ object.absolute_url }}"><img src="http://yourshot-uat.nationalgeographic.com/{{object.sizes.small-240}}" class="activitystream__image--small" /></a>
 <div class="activitystream__meta">
     <img src="http://www.heyreverb.com/wp-content/blogs.dir/4/files/2013/09/BillCosby_small-150x150.jpg" class="activitystream__badge__image">
-    <a href="#">{{ actor.firstName }} {{ actor.lastName }}</a> favorited the photo <a href="#">{{ object.title }}</a> by <a href="#"> {{ context.data.by }}</a>
-    <br /> <div class='activitystream__clock'> </div> 9 Apr
+    <a href="http://members.nationalgeographic.com/{{ actor.id }}">{{ actor.firstName }} {{ actor.lastName }}</a> {{verb.type}} the photo <a href="http://yourshot-uat.nationalgeographic.com{{ object.absolute_url }}">{{ object.title }}</a> by <a href="http://members.nationalgeographic.com/{{ object.owner.id}}/"> {{ object.owner.display_name }}</a>
+    <br /> <div class='activitystream__clock'> </div> {{ verb.data.created }}
 </div>
