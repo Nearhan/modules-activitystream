@@ -1,5 +1,6 @@
 define [
-], () ->
+    'config'
+], (config) ->
   'use strict';
 
   class User
@@ -9,7 +10,5 @@ define [
         @user_id = dataObj['user_id']
 
 
-    baseUrl = '/api/v1/'
-
     getAll: (verb_type) ->
-        baseUrl + "#{@user_type}/#{@user_id}/" + verb_type
+        config.baseUrl + "#{@user_type}/#{@user_id}/" + verb_type

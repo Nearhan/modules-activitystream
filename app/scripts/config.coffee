@@ -10,3 +10,4 @@ define [
             format: 'json'
         xhrFields:
             withCredentials: false
+  baseUrl: '/api/v1/'
