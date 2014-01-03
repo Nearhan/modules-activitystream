@@ -42,6 +42,7 @@ require [
   'models/activity'
   'views/activity'
   'collections/stream'
+  'modules/helpers'
 ], (Backbone, $, _, io, config, Logger, Activity, StreamView) ->
   Backbone.history.start()
 
