@@ -52,7 +52,7 @@ module.exports = function (grunt) {
                     '<%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs}',
                     'test/spec/**/*.js'
                 ],
-                tasks: ['sass:dist']
+                tasks: ['compass:dist']
             },
             handlebars: {
                 files: [
@@ -69,7 +69,7 @@ module.exports = function (grunt) {
             options: {
                 port: SERVER_PORT,
                 // change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost'
+                hostname: 'as.nationalgeographic.com'
             },
             livereload: {
                 options: {
@@ -107,7 +107,7 @@ module.exports = function (grunt) {
         },
         open: {
             server: {
-                path: 'http://localhost:<%= connect.options.port %>'
+                path: 'http://<%= connect.options.hostname %>:<%= connect.options.port %>'
             }
         },
         clean: {
@@ -292,16 +292,27 @@ module.exports = function (grunt) {
                 }
             }
         },
-        sass: {
+        compass: {
+            options: {
+                bundleExec: true,
+                sassDir: '<%= yeoman.app %>/styles/scss/',
+                cssDir: '.tmp/styles/css/'
+            },
+            dev: {
+                options: {
+                    environment: 'development'
+                }
+            },
             dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.app %>/styles/scss/',
-                    src: ['*.scss'],
-                    dest: '.tmp/styles/css/',
-                    ext: '.css'
-
-                }]
+                options: {
+                    environment: 'production'
+                }
+            }
+        },
+        concurrent: {
+            target1: ['coffee:dist', 'compass:dev'],
+            options: {
+                logConcurrentOutput: true
             }
         }
     });
@@ -310,7 +321,7 @@ module.exports = function (grunt) {
         grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
     });
 
-    grunt.registerTask('server', function (target) {
+    grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
             return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
         }
@@ -328,14 +339,18 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
-            'coffee:dist',
-            'sass:dist',
+            'concurrent:target1',
             'createDefaultTemplate',
             'handlebars',
             'connect:livereload',
             'open',
             'watch'
         ]);
+    });
+
+    grunt.registerTask('server', function () {
+        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
+        grunt.task.run(['serve']);
     });
 
     grunt.registerTask('test', [
@@ -350,7 +365,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'coffee',
-        'sass:dist',
+        'compass:dist',
         'createDefaultTemplate',
         'handlebars',
         'useminPrepare',

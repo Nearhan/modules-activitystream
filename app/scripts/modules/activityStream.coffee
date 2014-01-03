@@ -9,6 +9,7 @@ define [
   'views/stream'
   'modules/user',
   'modules/activityStream'
+  'modules/helpers'
 ], (Backbone, $, _, io, config, Logger, Activity, StreamView, User, ActivityStreamMoudule) ->
   'use strict';
 

@@ -6,7 +6,13 @@
 </ul>
 <a href="http://yourshot-uat.nationalgeographic.com{{ object.absolute_url }}"><img src="http://yourshot-uat.nationalgeographic.com/{{object.sizes.small-240}}" class="activitystream__image--small" /></a>
 <div class="activitystream__meta">
-    <img src="http://www.heyreverb.com/wp-content/blogs.dir/4/files/2013/09/BillCosby_small-150x150.jpg" class="activitystream__badge__image">
-    <a href="http://members.nationalgeographic.com/{{ actor.id }}">{{ actor.firstName }} {{ actor.lastName }}</a> {{verb.type}} the photo <a href="http://yourshot-uat.nationalgeographic.com{{ object.absolute_url }}">{{ object.title }}</a> by <a href="http://members.nationalgeographic.com/{{ object.owner.id}}/"> {{ object.owner.display_name }}</a>
-    <br /> <div class='activitystream__clock'> </div> {{ verb.data.created }}
+	<ul class="activitystream__meta__list">
+		<li class="activitystream__meta__list__item__image">
+    		<img src="/images/{{#getBadge verb.type}}{{verb.type}}{{/getBadge}}" class="activitystream__badge__image">
+    	</li>
+    	<li class="activitystream__meta__list__item__meta">
+    		<a href="http://members.nationalgeographic.com/{{ actor.id }}">{{ actor.firstName }} {{ actor.lastName }}</a> {{#toLower verb.type}}{{verb.type}}{{/toLower}} the photo <a href="http://yourshot-uat.nationalgeographic.com{{ object.absolute_url }}">{{ object.title }}</a> by <a href="http://members.nationalgeographic.com/{{ object.owner.id}}/"> {{ object.owner.display_name }}</a>
+    		<br /> <div class='activitystream__clock'> </div> {{#formatDate verb.data.created}}{{verb.data.created}}{{/formatDate}}
+    	</li>
+    </ul>
 </div>

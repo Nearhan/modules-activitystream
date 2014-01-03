@@ -73,20 +73,35 @@
     float: left;
 }
 
-.activitystream__badge__image {
-    width: 32px;
-    height: auto;
-    border: 1px solid red;
-
+.activitystream__meta__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
+
+.activitystream__meta__list__item__image {
+    display: inline-block;
+    float: left;
+}
+
+.activitystream__meta__list__item__meta {
+    padding-top: 10px;
+    margin-left: 2.2rem;
+}
+
+.activitystream__badge__image {
+    width: 28px;
+    height: auto;
+    padding-top: 10px;
+}
+
 .activitystream__clock {
     width: 10px;
-    height: 10px;
+    height: 14px;
     background-color: red;
     display: block;
     float: left;
-
-
+    margin-right: 5px;
 }
 .activitystream__counts__comment__icon {
     background: url("http://yourshot.nationalgeographic.com/static/img/icons/photo-icons.png") no-repeat -36px 0;
