@@ -39,36 +39,60 @@ require [
   'modules/logger'
   'modules/activity'
   'views/stream'
-  'models/activity'
-  'views/activity'
-  'collections/stream'
-], (Backbone, $, _, io, config, Logger, Activity, StreamView) ->
+  'modules/user'
+], (Backbone, $, _, io, config, Logger, Activity, StreamView, User) ->
   Backbone.history.start()
 
-  # Base Init
-  logger = new Logger()
+  class ActivityStreamMoudule
 
-  # Will have to figure out how to get a AS cookie before we fire everything else
+    ready: (options) ->
+      user = validate options
+      if not user
+        return throw new Error('Incorrect User Object')
+      init(user)
 
-  # Stream Module Init
-  window.stream = new StreamView()
+    validate = (options) =>  
+      if 'User' of options
+        user = options.User
+        if 'user_type' of user and 'user_id' of user
+          return new User(user)
+        return null
+      return null
 
-  activity = new Activity(stream)
+    init = (user) ->
 
-  # Init Socket Connection
-  socket = io.connect(config.activityStreamServiceAPI)
+      # Base Init that loads our other modules
+      logger = new Logger()
 
-  socket.on "connect", socketConnected = ->
-    console.log "Socket opened"
-    stream.ready()
-    socket.get '/api/v1/mmdb_user/1/FAVORITED', (data) ->
-        _.each data, stream.addActivity
+      # Will have to figure out how to get a AS cookie before we fire everything else
+      # Stream Module Init
+      window.stream = new StreamView()
 
-    socket.post '/api/v1/subscribe', { user: 1 }
+      activity = new Activity(stream)
 
-    socket.on "message", messageReceived = (message) ->
-      activity.parseMessage(message.data.data, message.verb)
 
+      # Init Socket Connection
+      socket = io.connect(config.activityStreamServiceAPI)
+
+      socket.on "connect", socketConnected = ->
+        console.log "Socket opened"
+        stream.ready()
+        socket.get user.getAll('FAVORITED'), (data) ->
+          _.each data, stream.addActivity
+
+        socket.post '/api/v1/subscribe', { user: user.user_id }
+
+        socket.on "message", messageReceived = (message) ->
+          activity.parseMessage(message.data.data, message.verb)
+
+  window.AS = new ActivityStreamMoudule()
+
+  testUserObj =
+    User:
+      user_type: 'mmdb_user'
+      user_id: '1'
+
+  window.AS.ready(testUserObj)
   # Different socket events will probably have to be handled
   # in a module that gets instantiated here
   # socket.on "message", messageReceived = (message) ->
