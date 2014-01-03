@@ -48,6 +48,8 @@ require [
   # Base Init
   logger = new Logger()
 
+  userId = 1
+
   # Will have to figure out how to get a AS cookie before we fire everything else
 
   # Stream Module Init
@@ -61,10 +63,10 @@ require [
   socket.on "connect", socketConnected = ->
     console.log "Socket opened"
     stream.ready()
-    socket.get '/api/v1/mmdb_user/1/FAVORITED', (data) ->
+    socket.get '/api/v1/mmdb_user/' + userId + '/FAVORITED', (data) ->
         _.each data, stream.addActivity
 
-    socket.post '/api/v1/subscribe', { user: 1 }
+    socket.post '/api/v1/subscribe', { user: userId }
 
     socket.on "message", messageReceived = (message) ->
       activity.parseMessage(message, message.verb)
