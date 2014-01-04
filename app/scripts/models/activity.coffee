@@ -20,7 +20,7 @@ define [
       @grab(@dfd)
 
     grab: ->
-        $.when(@models.actor.fetch(), @models.object.fetch()).then($.proxy( () ->
+        $.when(@models.actor.fetch(), @models.object.fetch()).then($.proxy( ->
             @dfd.resolve(@)
         , @))
 
