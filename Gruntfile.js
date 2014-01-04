@@ -52,7 +52,7 @@ module.exports = function (grunt) {
                     '<%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs}',
                     'test/spec/**/*.js'
                 ],
-                tasks: ['compass:dist']
+                tasks: ['concurrent:target1', 'handlebars']
             },
             handlebars: {
                 files: [
@@ -296,7 +296,10 @@ module.exports = function (grunt) {
             options: {
                 bundleExec: true,
                 sassDir: '<%= yeoman.app %>/styles/scss/',
-                cssDir: '.tmp/styles/css/'
+                cssDir: '.tmp/styles/css/',
+                require: ['sass-globbing'],
+                httpFontsPath: 'http://<%= connect.options.hostname %>:<%= connect.options.port %>/fonts/',
+                fontsPath: '<%= yeoman.app %>/fonts/'
             },
             dev: {
                 options: {

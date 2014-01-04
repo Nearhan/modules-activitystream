@@ -9,7 +9,7 @@ define [
 ], ($, _, Backbone, JST, StreamCollection, ActivityModel, ActivityView) ->
   class StreamView extends Backbone.View
     template: JST['app/scripts/templates/stream.hbs']
-    el: $ 'div.activitystream'
+    el: $ '#JS_activitycontainer'
     self: @
 
     initialize: ->
@@ -27,7 +27,7 @@ define [
         console.log('asked for more items')
 
     ready: ->
-        $(@el).find('div.activitystream__pending').remove()
+        $(@el).find('#JS_activitypending').remove()
 
     addActivity: (activity) ->
       activityModel = new ActivityModel(activity)
@@ -37,7 +37,7 @@ define [
 
     appendActivity: (activity) ->
         activity_view = new ActivityView model: activity
-        $(@el).find('ul.activitystream__list').append activity_view.render().el
+        $(@el).find('#JS_activitystream').append activity_view.render().el
 
     events:
         'click .activity.show--more': 'page'

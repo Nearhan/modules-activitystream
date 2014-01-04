@@ -10,5 +10,7 @@
     "modernizr": "~2.6.x",
     "handlebars": "~1.0.x"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "font-awesome": "~4.0.3"
+  }
 }
