@@ -19,10 +19,7 @@ define [
         options = config.api[@type]
       else
         options.xhrFields = withCredentials: true # Should this be default?
-      x = Backbone.Model::fetch.call @, options
-      x.done($.proxy( ->
-        console.log '@->',@.cid, @
-      , @))
+        Backbone.Model::fetch.call @, options
 
     # sync: ->
     #   console.log arguments

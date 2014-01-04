@@ -46,7 +46,6 @@ require [
 ], (Backbone, $, _, io, config, Logger, Activity, StreamView) ->
   Backbone.history.start()
 
-  console.log '__________________________________________________'
   # Base Init
   logger = new Logger()
 
@@ -63,7 +62,7 @@ require [
   socket = io.connect(config.activityStreamServiceAPI)
 
   socket.on "connect", socketConnected = ->
-    console.log "Socket opened"
+    # console.log "Socket opened"
     stream.ready()
     socket.get '/api/v1/mmdb_user/' + userId + '/FAVORITED', (data) ->
         _.each data, stream.addActivity

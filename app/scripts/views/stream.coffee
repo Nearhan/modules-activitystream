@@ -15,8 +15,6 @@ define [
     initialize: ->
         _.bindAll @
 
-        window.models = []
-
         @collection = new StreamCollection
         @collection.bind 'add', @appendActivity
 
@@ -36,12 +34,10 @@ define [
     addActivity: (activity) ->
       activityModel = new ActivityModel(activity)
       $.when(activityModel.dfd).then($.proxy( () ->
-        window.models.push activityModel
         @collection.add activityModel
       , @))
 
     appendActivity: (activity) ->
-        # console.log activity.attributes.object.data, 'this is what we see when we append'
         activity_view = new ActivityView model: activity
         $(@el).find('ul.activitystream__list').append activity_view.render().el
 
