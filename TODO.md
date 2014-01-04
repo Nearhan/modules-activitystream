@@ -4,3 +4,5 @@
 - Will have to figure out how to get a AS cookie before we fire everything else
 - improve images / badges / icons for hiDPI screens
 - remove extraneous containers and markup
+- replace font-awesome with custom font icons
+- add notation to CSS (welch)
