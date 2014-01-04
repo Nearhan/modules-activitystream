@@ -18,6 +18,8 @@ define [
         @collection = new StreamCollection
         @collection.bind 'add', @appendActivity
 
+        window.collection = @collection
+
         @render()
 
     render: ->
@@ -31,7 +33,7 @@ define [
 
     addActivity: (activity) ->
       activityModel = new ActivityModel(activity)
-      $.when(activityModel.dfd).then($.proxy(->
+      $.when(activityModel.dfd).then($.proxy( () ->
         @collection.add activityModel
       , @))
 

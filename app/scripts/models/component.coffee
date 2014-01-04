@@ -20,3 +20,6 @@ define [
       else
         options.xhrFields = withCredentials: true # Should this be default?
       Backbone.Model::fetch.call @, options
+
+    # sync: ->
+    #   console.log arguments
