@@ -32,46 +32,19 @@ require.config
 
 require [
   'backbone'
-  'jquery'
-  'underscore'
-  'sailsio'
-  'config'
-  'modules/logger'
-  'modules/activity'
-  'views/stream'
-  'models/activity'
-  'views/activity'
-  'collections/stream'
-  'modules/helpers'
-], (Backbone, $, _, io, config, Logger, Activity, StreamView) ->
+  'modules/activityStream'
+], (Backbone, ActivityStreamMoudule) ->
   Backbone.history.start()
 
-  # Base Init
-  logger = new Logger()
 
-  userId = 1
+  window.AS = new ActivityStreamMoudule()
 
-  # Will have to figure out how to get a AS cookie before we fire everything else
+  testUserObj =
+    User:
+      user_type: 'mmdb_user'
+      user_id: '1'
 
-  # Stream Module Init
-  window.stream = new StreamView()
-
-  activity = new Activity(stream)
-
-  # Init Socket Connection
-  socket = io.connect(config.activityStreamServiceAPI)
-
-  socket.on "connect", socketConnected = ->
-    # console.log "Socket opened"
-    stream.ready()
-    socket.get '/api/v1/mmdb_user/' + userId + '/FAVORITED', (data) ->
-        _.each data, stream.addActivity
-
-    socket.post '/api/v1/subscribe', { user: userId }
-
-    socket.on "message", messageReceived = (message) ->
-      activity.parseMessage(message, message.verb)
-
+  window.AS.ready(testUserObj)
   # Different socket events will probably have to be handled
   # in a module that gets instantiated here
   # socket.on "message", messageReceived = (message) ->
