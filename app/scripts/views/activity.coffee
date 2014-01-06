@@ -9,7 +9,7 @@ define [
 
     tagName: 'li'
 
-    className: 'activitystream__item'
+    className: 'activitystream-item'
 
     initialize: ->
         window.activityView = this

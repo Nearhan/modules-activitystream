@@ -1,0 +1,17 @@
+.activityitem {
+    margin: 0 0 .5em;
+    background-color: $color-epsilon;
+    border: $border-default;
+    position: relative;
+
+    @include e(social) {
+        position: absolute;
+        top: .5em;
+        left: .5em;
+    }
+
+    @include e(image) {
+        width: 100%;
+        height: auto;
+    }
+}

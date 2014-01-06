@@ -1,0 +1,13 @@
+.activitysocial {
+    background-color: $color-zeta-transparent;
+    padding: .125em .25em;
+    border-radius: .125em;
+
+    @include e(item) {
+        margin-right: .5em;
+    }
+
+    @include e(icon) {
+        margin-right: .25em;
+    }
+}
