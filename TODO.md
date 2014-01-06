@@ -6,3 +6,4 @@
 - remove extraneous containers and markup
 - replace font-awesome with custom font icons
 - add notation to CSS (welch)
+- Create sass boilerplate for a namespaced css normalizer and replace current normalizer

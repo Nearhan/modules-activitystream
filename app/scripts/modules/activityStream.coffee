@@ -21,7 +21,7 @@ define [
         return throw new Error('Incorrect User Object')
       init(user)
 
-    validate = (options) =>  
+    validate = (options) =>
       if 'User' of options
         user = options.User
         if 'user_type' of user and 'user_id' of user
@@ -32,12 +32,11 @@ define [
     init = (user) ->
 
       # Base Init that loads our other modules
-      console.log '__________________________________________________'
       logger = new Logger()
 
       # Will have to figure out how to get a AS cookie before we fire everything else
       # Stream Module Init
-      window.stream = new StreamView()
+      stream = new StreamView()
 
       activity = new Activity(stream)
 
