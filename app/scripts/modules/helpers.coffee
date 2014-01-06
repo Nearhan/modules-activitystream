@@ -10,7 +10,7 @@ require [
     mthNames = [
       "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
     ]
-  
+
     newDate = new Date(date)
     month = mthNames[newDate.getMonth()]
     day = newDate.getDate()

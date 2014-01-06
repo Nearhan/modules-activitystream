@@ -10,7 +10,6 @@ define [
   class StreamView extends Backbone.View
     template: JST['app/scripts/templates/stream.hbs']
     el: $ '#JS_activitycontainer'
-    self: @
 
     initialize: ->
         _.bindAll @

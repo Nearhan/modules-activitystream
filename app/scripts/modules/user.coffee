@@ -1,14 +1,14 @@
 define [
+    'underscore'
     'config'
-], (config) ->
+], (_, config) ->
   'use strict';
 
   class User
 
-    constructor: (dataObj) ->
-        @user_type = dataObj['user_type']
-        @user_id = dataObj['user_id']
+    constructor: (args) ->
+        @type = args.type
+        @id = args.id
 
-
-    getAll: (verb_type) ->
-        config.baseUrl + "#{@user_type}/#{@user_id}/" + verb_type
+    getAll: (verbType) ->
+        config.baseUrl + "#{@type}/#{@id}/" + verbType

@@ -33,16 +33,17 @@ require.config
 require [
   'backbone'
   'modules/activityStream'
-], (Backbone, ActivityStreamMoudule) ->
+  'modules/helpers'
+], (Backbone, ActivityStreamModule) ->
   Backbone.history.start()
 
 
-  window.AS = new ActivityStreamMoudule()
+  window.AS = new ActivityStreamModule()
 
   testUserObj =
-    User:
-      user_type: 'mmdb_user'
-      user_id: '1'
+    user:
+      type: 'mmdb_user'
+      id: '1'
 
   window.AS.ready(testUserObj)
   # Different socket events will probably have to be handled

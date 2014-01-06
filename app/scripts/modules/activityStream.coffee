@@ -8,29 +8,17 @@ define [
   'modules/activity'
   'views/stream'
   'modules/user',
-  'modules/activityStream'
-  'modules/helpers'
-], (Backbone, $, _, io, config, Logger, Activity, StreamView, User, ActivityStreamMoudule) ->
+], (Backbone, $, _, io, config, Logger, Activity, StreamView, User) ->
   'use strict';
 
-  class ActivityStreamMoudule
+  class ActivityStreamModule
 
     ready: (options) ->
-      user = validate options
-      if not user
-        return throw new Error('Incorrect User Object')
-      init(user)
+      @user = new User(options.user)
+      init(@user)
+      window.x = @
 
-    validate = (options) =>
-      if 'User' of options
-        user = options.User
-        if 'user_type' of user and 'user_id' of user
-          return new User(user)
-        return null
-      return null
-
-    init = (user) ->
-
+    init= (user) ->
       # Base Init that loads our other modules
       logger = new Logger()
 
@@ -45,12 +33,11 @@ define [
       socket = io.connect(config.activityStreamServiceAPI)
 
       socket.on "connect", socketConnected = ->
-        console.log "Socket opened"
         stream.ready()
         socket.get user.getAll('FAVORITED'), (data) ->
           _.each data, stream.addActivity
 
-        socket.post '/api/v1/subscribe', { user: user.user_id }
+        socket.post '/api/v1/subscribe', { user: user.id }
 
         socket.on "message", messageReceived = (message) ->
           activity.parseMessage(message.data.data, message.verb)
