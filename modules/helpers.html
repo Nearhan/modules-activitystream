@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="en"><head><title>modules/helpers</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="modules/helpers"><meta name="groc-project-path" content="app/scripts/modules/helpers.coffee"><meta name="groc-github-url" content="https://github.com/natgeo/modules-activitystream"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/natgeo/modules-activitystream/blob/master/app/scripts/modules/helpers.coffee">app/scripts/modules/helpers.coffee</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nx">require</span> <span class="p">[</span>
+  <span class="s">&#39;handlebars&#39;</span>
+<span class="p">],</span> <span class="nf">(Handlebars) -&gt;</span>
+  <span class="s">&#39;use strict&#39;</span><span class="p">;</span>
+
+  <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">registerHelper</span> <span class="s">&#39;toLower&#39;</span><span class="p">,</span> <span class="nf">(value) -&gt;</span>
+    <span class="nx">value</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+
+  <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">registerHelper</span> <span class="s">&#39;formatDate&#39;</span><span class="p">,</span> <span class="nf">(date) -&gt;</span>
+    <span class="nv">mthNames = </span><span class="p">[</span>
+      <span class="s">&quot;Jan&quot;</span><span class="p">,</span><span class="s">&quot;Feb&quot;</span><span class="p">,</span><span class="s">&quot;Mar&quot;</span><span class="p">,</span><span class="s">&quot;Apr&quot;</span><span class="p">,</span><span class="s">&quot;May&quot;</span><span class="p">,</span><span class="s">&quot;Jun&quot;</span><span class="p">,</span><span class="s">&quot;Jul&quot;</span><span class="p">,</span><span class="s">&quot;Aug&quot;</span><span class="p">,</span><span class="s">&quot;Sep&quot;</span><span class="p">,</span><span class="s">&quot;Oct&quot;</span><span class="p">,</span><span class="s">&quot;Nov&quot;</span><span class="p">,</span><span class="s">&quot;Dec&quot;</span>
+    <span class="p">]</span>
+
+    <span class="nv">newDate = </span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">date</span><span class="p">)</span>
+    <span class="nv">month = </span><span class="nx">mthNames</span><span class="p">[</span><span class="nx">newDate</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()]</span>
+    <span class="nv">day = </span><span class="nx">newDate</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()</span>
+    <span class="nv">compiledDate = </span><span class="nx">day</span> <span class="o">+</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="nx">month</span>
+
+  <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">registerHelper</span> <span class="s">&#39;getBadge&#39;</span><span class="p">,</span> <span class="nf">(verb) -&gt;</span>
+    <span class="k">switch</span> <span class="nx">verb</span>
+      <span class="k">when</span> <span class="s">&#39;FAVORITED&#39;</span> <span class="k">then</span> <span class="s">&#39;nationalGeographic_web-heart.png&#39;</span></div></div></div></div></body></html>

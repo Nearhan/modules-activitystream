@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en"><head><title>main</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="main"><meta name="groc-project-path" content="app/scripts/main.coffee"><meta name="groc-github-url" content="https://github.com/natgeo/modules-activitystream"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/natgeo/modules-activitystream/blob/master/app/scripts/main.coffee">app/scripts/main.coffee</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="c1">#/*global require*/</span>
+<span class="s">&#39;use strict&#39;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Main RequireJS properties loaded on init:</p></div></div><div class="code"><div class="wrapper"><span class="nx">require</span><span class="p">.</span><span class="nx">config</span>
+  <span class="nv">shim:</span>
+    <span class="nv">underscore:</span>
+      <span class="nv">exports: </span><span class="s">&#39;_&#39;</span>
+    <span class="nv">backbone:</span>
+      <span class="nv">deps: </span><span class="p">[</span>
+        <span class="s">&#39;underscore&#39;</span>
+        <span class="s">&#39;jquery&#39;</span>
+      <span class="p">]</span>
+      <span class="nv">exports: </span><span class="s">&#39;Backbone&#39;</span>
+    <span class="nv">handlebars:</span>
+      <span class="nv">exports: </span><span class="s">&#39;Handlebars&#39;</span>
+    <span class="nv">sailsio:</span>
+      <span class="nv">deps: </span><span class="p">[</span>
+        <span class="s">&#39;io&#39;</span>
+      <span class="p">]</span>
+      <span class="nv">exports: </span><span class="s">&#39;io&#39;</span>
+  <span class="nv">paths:</span>
+    <span class="nv">jquery: </span><span class="s">&#39;../bower_components/jquery/jquery&#39;</span>
+    <span class="nv">backbone: </span><span class="s">&#39;../bower_components/backbone/backbone&#39;</span>
+    <span class="nv">underscore: </span><span class="s">&#39;../bower_components/underscore/underscore&#39;</span>
+    <span class="nv">handlebars: </span><span class="s">&#39;../bower_components/handlebars/handlebars&#39;</span>
+    <span class="nv">io: </span><span class="s">&#39;/scripts/vendor/socket.io/socket.io&#39;</span>
+    <span class="nv">sailsio: </span><span class="s">&#39;/scripts/vendor/sails.io/sails.io&#39;</span>
+    <span class="nv">models: </span><span class="s">&#39;/scripts/models&#39;</span>
+    <span class="nv">views: </span><span class="s">&#39;/scripts/views&#39;</span>
+    <span class="nv">collections: </span><span class="s">&#39;/scripts/collections&#39;</span>
+    <span class="nv">modules: </span><span class="s">&#39;/scripts/modules&#39;</span>
+
+<span class="nx">require</span> <span class="p">[</span>
+  <span class="s">&#39;backbone&#39;</span>
+  <span class="s">&#39;modules/activityStream&#39;</span>
+  <span class="s">&#39;modules/helpers&#39;</span>
+<span class="p">],</span> <span class="nf">(Backbone, ActivityStreamModule) -&gt;</span>
+  <span class="nx">Backbone</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+
+
+  <span class="nb">window</span><span class="p">.</span><span class="nv">AS = </span><span class="k">new</span> <span class="nx">ActivityStreamModule</span><span class="p">()</span>
+
+  <span class="nv">testUserObj =</span>
+    <span class="nv">user:</span>
+      <span class="nv">type: </span><span class="s">&#39;mmdb_user&#39;</span>
+      <span class="nv">id: </span><span class="s">&#39;1&#39;</span>
+
+  <span class="nb">window</span><span class="p">.</span><span class="nx">AS</span><span class="p">.</span><span class="nx">ready</span><span class="p">(</span><span class="nx">testUserObj</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Different socket events will probably have to be handled
+in a module that gets instantiated here
+socket.on "message", messageReceived = (message) ->
+logger.log "New comet message received :: ", message
+$.each message.data.object.data, (l, m) ->
+  logger.log l, m
+  if l is ("yourshot<em>photo</em>id")
+  hearts = $("#" + m + " i")
+  $("a").find(hearts).toggleClass "chosen"</p></div></div></div></div></body></html>
