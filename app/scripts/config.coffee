@@ -6,7 +6,7 @@ define [
   api:
     yourshot_photo:
         data:
-            apikey: '3acd2b1a326570cc800d4de69a7162e1f26e4d79',
+            apikey: '',
             format: 'json'
         xhrFields:
             withCredentials: false
