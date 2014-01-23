@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="en"><head><title>modules/activityStream</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="modules/activityStream"><meta name="groc-project-path" content="app/scripts/modules/activityStream.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/scripts/modules/activityStream.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nx">define</span> <span class="p">[</span>
+  <span class="s">&#39;backbone&#39;</span>
+  <span class="s">&#39;jquery&#39;</span>
+  <span class="s">&#39;underscore&#39;</span>
+  <span class="s">&#39;sailsio&#39;</span>
+  <span class="s">&#39;config&#39;</span>
+  <span class="s">&#39;modules/logger&#39;</span>
+  <span class="s">&#39;modules/activity&#39;</span>
+  <span class="s">&#39;views/stream&#39;</span>
+  <span class="s">&#39;modules/user&#39;</span><span class="p">,</span>
+<span class="p">],</span> <span class="nf">(Backbone, $, _, io, config, Logger, Activity, StreamView, User) -&gt;</span>
+  <span class="s">&#39;use strict&#39;</span><span class="p">;</span>
+
+  <span class="k">class</span> <span class="nx">ActivityStreamModule</span>
+
+    <span class="nv">ready: </span><span class="nf">(options) -&gt;</span>
+      <span class="vi">@user = </span><span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span>
+      <span class="nx">init</span><span class="p">(</span><span class="nx">@user</span><span class="p">)</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nv">x = </span><span class="nx">@</span>
+
+    <span class="nv">init= </span><span class="nf">(user) -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Base Init that loads our other modules</p></div></div><div class="code"><div class="wrapper">      <span class="nv">logger = </span><span class="k">new</span> <span class="nx">Logger</span><span class="p">()</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Will have to figure out how to get a AS cookie before we fire everything else
+Stream Module Init</p></div></div><div class="code"><div class="wrapper">      <span class="nv">stream = </span><span class="k">new</span> <span class="nx">StreamView</span><span class="p">()</span>
+
+      <span class="nv">activity = </span><span class="k">new</span> <span class="nx">Activity</span><span class="p">(</span><span class="nx">stream</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Init Socket Connection</p></div></div><div class="code"><div class="wrapper">      <span class="nv">socket = </span><span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">activityStreamServiceAPI</span><span class="p">)</span>
+
+      <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span> <span class="s">&quot;connect&quot;</span><span class="p">,</span> <span class="nv">socketConnected = </span><span class="nf">-&gt;</span>
+        <span class="nx">stream</span><span class="p">.</span><span class="nx">ready</span><span class="p">()</span>
+        <span class="nx">socket</span><span class="p">.</span><span class="nx">get</span> <span class="nx">user</span><span class="p">.</span><span class="nx">getAll</span><span class="p">(</span><span class="s">&#39;FAVORITED&#39;</span><span class="p">),</span> <span class="nf">(data) -&gt;</span>
+          <span class="nx">_</span><span class="p">.</span><span class="nx">each</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">stream</span><span class="p">.</span><span class="nx">addActivity</span>
+
+        <span class="nx">socket</span><span class="p">.</span><span class="nx">post</span> <span class="s">&#39;/api/v1/subscribe&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nv">user: </span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="p">}</span>
+
+        <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span> <span class="s">&quot;message&quot;</span><span class="p">,</span> <span class="nv">messageReceived = </span><span class="nf">(message) -&gt;</span>
+          <span class="nx">activity</span><span class="p">.</span><span class="nx">parseMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span> <span class="nx">message</span><span class="p">.</span><span class="nx">verb</span><span class="p">)</span></div></div></div></div></body></html>

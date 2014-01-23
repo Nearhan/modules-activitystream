@@ -1,6 +1,7 @@
 #/*global require*/
 'use strict'
 
+# Main RequireJS properties loaded on init:
 require.config
   shim:
     underscore:

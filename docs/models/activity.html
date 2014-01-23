@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="en"><head><title>models/activity</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="models/activity"><meta name="groc-project-path" content="app/scripts/models/activity.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/scripts/models/activity.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nx">define</span> <span class="p">[</span>
+  <span class="s">&#39;underscore&#39;</span>
+  <span class="s">&#39;jquery&#39;</span>
+  <span class="s">&#39;backbone&#39;</span>
+  <span class="s">&#39;models/actor&#39;</span>
+  <span class="s">&#39;models/verb&#39;</span>
+  <span class="s">&#39;models/object&#39;</span>
+<span class="p">],</span> <span class="nf">(_, $, Backbone, ActorModel, VerbModel, ObjectModel) -&gt;</span>
+  <span class="s">&#39;use strict&#39;</span><span class="p">;</span>
+
+  <span class="k">class</span> <span class="nx">ActivityModel</span> <span class="k">extends</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Will have to remove these defaults once we're set up</p></div></div><div class="code"><div class="wrapper">    <span class="nv">dfd: </span><span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Deferred</span><span class="p">()</span>
+
+    <span class="nv">initialize: </span><span class="nf">-&gt;</span>
+      <span class="vi">@models = </span><span class="p">{}</span>
+      <span class="vi">@models.actor = </span><span class="k">new</span> <span class="nx">ActorModel</span><span class="p">(</span><span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">actor</span><span class="p">)</span>
+      <span class="vi">@models.verb = </span><span class="k">new</span> <span class="nx">VerbModel</span><span class="p">(</span><span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">verb</span><span class="p">)</span>
+      <span class="vi">@models.object = </span><span class="k">new</span> <span class="nx">ObjectModel</span><span class="p">(</span><span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">object</span><span class="p">)</span>
+      <span class="nx">@grab</span><span class="p">(</span><span class="nx">@dfd</span><span class="p">)</span>
+
+    <span class="nv">grab: </span><span class="nf">-&gt;</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">when</span><span class="p">(</span><span class="nx">@models</span><span class="p">.</span><span class="nx">actor</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(),</span> <span class="nx">@models</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">fetch</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span> <span class="nf">-&gt;</span>
+            <span class="nx">@dfd</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">@</span><span class="p">)</span>
+        <span class="p">,</span> <span class="nx">@</span><span class="p">))</span>
+
+    <span class="nv">toJSON: </span><span class="nf">-&gt;</span>
+        <span class="nv">obj = </span><span class="p">{}</span>
+        <span class="nv">obj.actor = </span><span class="nx">@models</span><span class="p">.</span><span class="nx">actor</span><span class="p">.</span><span class="nx">attributes</span>
+        <span class="nv">obj.object = </span><span class="nx">@models</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">attributes</span>
+        <span class="nv">obj.verb = </span><span class="nx">@models</span><span class="p">.</span><span class="nx">verb</span><span class="p">.</span><span class="nx">attributes</span>
+        <span class="k">return</span> <span class="nx">obj</span></div></div></div></div></body></html>
