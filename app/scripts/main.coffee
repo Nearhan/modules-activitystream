@@ -24,7 +24,7 @@ require.config
     backbone: '../bower_components/backbone/backbone'
     underscore: '../bower_components/underscore/underscore'
     handlebars: '../bower_components/handlebars/handlebars'
-    io: '/scripts/vendor/socket.io/socket.io'
+    io: '../bower_components/socket.io-client/dist/socket.io'
     sailsio: '/scripts/vendor/sails.io/sails.io'
     models: '/scripts/models'
     views: '/scripts/views'

@@ -69,7 +69,7 @@ module.exports = function (grunt) {
             options: {
                 port: SERVER_PORT,
                 // change this to '0.0.0.0' to access the server from outside
-                hostname: 'as.nationalgeographic.com'
+                hostname: 'as.dev.nationalgeographic.com'
             },
             livereload: {
                 options: {
@@ -176,7 +176,7 @@ module.exports = function (grunt) {
                         'underscore': '../../app/bower_components/underscore/underscore',
                         'handlebars': '../../app/bower_components/handlebars/handlebars',
                         'backbone': '../../app/bower_components/backbone/backbone',
-                        'io': '../../app/scripts/vendor/socket.io/socket.io',
+                        'io': '../../app/bower_components/socket.io-client/dist/socket.io.min',
                         'sailsio': '../../app/scripts/vendor/sails.io/sails.io',
                         'models': '../../.tmp/scripts/models',
                         'views': '../../.tmp/scripts/views',
