@@ -40,6 +40,8 @@ define [
             socket.get user.getAll('FAVORITED'), (data) ->
               _.each data, stream.addActivity
 
+            # Important for this to happen after the GET request
+            # because we want updates to happen after initial load
             socket.post '/api/v1/subscribe', { user: user.id }
 
             socket.on "message", messageReceived = (message) ->
