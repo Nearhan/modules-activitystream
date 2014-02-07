@@ -25,7 +25,10 @@ define [
       # Stream Module Init
       stream = new StreamView()
 
+      # Activity Module Init
       activity = new Activity(stream)
+
+      socket = {}
 
       # Establish/reinit a session cookie with the Activity Streams server
       $.ajax
@@ -34,15 +37,16 @@ define [
         complete: ->
           # Init Socket Connection
           socket = io.connect(config.activityStreamServiceAPI)
+          socket.on "connect", socketStart
 
-          socket.on "connect", socketConnected = ->
-            stream.ready()
-            socket.get user.getAll('FAVORITED'), (data) ->
-              _.each data, stream.addActivity
+      socketStart= ->
+        stream.ready()
+        socket.get user.getAll('FAVORITED'), (data) ->
+          _.each data, stream.addActivity
 
-            # Important for this to happen after the GET request
-            # because we want updates to happen after initial load
-            socket.post '/api/v1/subscribe', { user: user.id }
+        # Important for this to happen after the GET request
+        # because we want updates to happen after initial load
+        socket.post '/api/v1/subscribe', { user: user.id }
 
-            socket.on "message", messageReceived = (message) ->
-              activity.parseMessage(message.data.data, message.verb)
+        socket.on "message", messageReceived = (message) ->
+          activity.parseMessage(message.data.data, message.verb)
