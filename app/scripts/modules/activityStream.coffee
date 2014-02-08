@@ -32,7 +32,7 @@ define [
 
       # Establish/reinit a session cookie with the Activity Streams server
       $.ajax
-        url: config.activityStreamServiceAPI
+        url: config.activityStreamServiceAPI + 'api/v1'
         dataType: "jsonp"
         complete: ->
           # Init Socket Connection
