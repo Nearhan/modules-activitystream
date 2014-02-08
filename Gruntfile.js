@@ -126,18 +126,11 @@ module.exports = function (grunt) {
                 'test/spec/{,*/}*.js'
             ]
         },
-        jasmine: {
-            all:{
-                src : '/scripts/{,*/}*.js',
+        mochaTest: {
+            dev: {
+                src: ['tests/**/*.js'],
                 options: {
-                    keepRunner: true,
-                    specs : 'test/spec/**/*.js',
-                    vendor : [
-                        '<%= yeoman.app %>/bower_components/jquery/jquery.js',
-                        '<%= yeoman.app %>/bower_components/underscore/underscore.js',
-                        '<%= yeoman.app %>/bower_components/backbone/backbone.js',
-                        '.tmp/scripts/templates.js'
-                    ]
+                    reporter: 'spec'
                 }
             }
         },
@@ -361,7 +354,7 @@ module.exports = function (grunt) {
         'coffee',
         'createDefaultTemplate',
         'handlebars',
-        'jasmine',
+        'mochaTest:dev',
         'watch:test'
     ]);
 

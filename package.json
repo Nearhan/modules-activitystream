@@ -27,7 +27,10 @@
     "time-grunt": "~0.2.x",
     "jshint-stylish": "~0.1.x",
     "grunt-contrib-compass": "~0.7.0",
-    "grunt-concurrent": "~0.4.2"
+    "grunt-concurrent": "~0.4.2",
+    "mocha": "~1.17.1",
+    "grunt-mocha-test": "~0.9.0",
+    "request": "~2.33.0"
   },
   "engines": {
     "node": ">=0.8.0"
