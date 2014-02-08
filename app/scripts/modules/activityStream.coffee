@@ -43,6 +43,8 @@ define [
           # Init Socket Connection
           socket = io.connect(config.activityStreamServiceAPI)
           socket.on "connect", socketStart
+        error: (e) ->
+          # TODO: Display an error once we get the module rendering properly again
 
       socketStart= ->
         stream.ready()
