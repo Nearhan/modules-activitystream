@@ -31,6 +31,11 @@ define [
       socket = {}
 
       # Establish/reinit a session cookie with the Activity Streams server
+      # Without sending an empty JSONP call to the AS server, we won't get
+      # an authentication cookie that will allow us to establish the socket.
+      # Needs to be JSONP as this is technically considered a 3rd party domain.
+      # If a cookie already exists, and the sesion is valid, then the same cookie
+      # will be used.
       $.ajax
         url: config.activityStreamServiceAPI + 'api/v1'
         dataType: "jsonp"
