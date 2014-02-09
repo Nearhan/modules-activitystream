@@ -39,12 +39,16 @@ define [
       $.ajax
         url: config.activityStreamServiceAPI + 'api/v1'
         dataType: "jsonp"
-        complete: ->
+        timeout: 12000
+        cache: false
+        complete: (data) ->
           # Init Socket Connection
-          socket = io.connect(config.activityStreamServiceAPI)
-          socket.on "connect", socketStart
-        error: (e) ->
-          # TODO: Display an error once we get the module rendering properly again
+          if data.status isnt 0
+            console.log data.status
+            socket = io.connect(config.activityStreamServiceAPI)
+            socket.on "connect", socketStart
+        error: () ->
+          $("#JS_activitypending").text "Error:  Unable to connect to Activity Stream service"
 
       socketStart= ->
         stream.ready()
