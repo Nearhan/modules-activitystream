@@ -169,7 +169,7 @@ module.exports = function (grunt) {
                         'underscore': '../../app/bower_components/underscore/underscore',
                         'handlebars': '../../app/bower_components/handlebars/handlebars',
                         'backbone': '../../app/bower_components/backbone/backbone',
-                        'io': '../../app/bower_components/socket.io-client/dist/socket.io.min',
+                        'io': '../../app/bower_components/socket.io-client/dist/socket.io',
                         'sailsio': '../../app/scripts/vendor/sails.io/sails.io',
                         'models': '../../.tmp/scripts/models',
                         'views': '../../.tmp/scripts/views',

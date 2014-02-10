@@ -2,7 +2,7 @@ define [
 ], () ->
   'use strict';
 
-  activityStreamServiceAPI: 'http://as.dev.nationalgeographic.com:9365/'
+  activityStreamServiceAPI: '//as.dev.nationalgeographic.com:9365/'
   api:
     yourshot_photo:
         data:
