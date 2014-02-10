@@ -36,6 +36,13 @@ define [
       # Needs to be JSONP as this is technically considered a 3rd party domain.
       # If a cookie already exists, and the sesion is valid, then the same cookie
       # will be used.
+      #
+      # The AS Service will respond with a JSON response (res.json()), so we just
+      # check to make sure that the call completed and that the status code is not 0.
+      # Otherwise, the calls on the Service end would need to be converted to res.jsonp().
+      # JSONP apparently has some security issues that we don't want to expose on the 
+      # Service side.
+      
       $.ajax
         url: config.activityStreamServiceAPI + 'api/v1'
         dataType: 'jsonp'
