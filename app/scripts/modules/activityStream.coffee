@@ -38,7 +38,7 @@ define [
       # will be used.
       $.ajax
         url: config.activityStreamServiceAPI + 'api/v1'
-        dataType: "jsonp"
+        dataType: 'jsonp'
         timeout: 12000
         cache: false
         complete: (data) ->
@@ -46,9 +46,9 @@ define [
           if data.status isnt 0
             console.log data.status
             socket = io.connect(config.activityStreamServiceAPI)
-            socket.on "connect", socketStart
+            socket.on 'connect', socketStart
         error: () ->
-          $("#JS_activitypending").text "Error:  Unable to connect to Activity Stream service"
+          $('#JS_activitypending').text "Error:  Unable to connect to Activity Stream service"
 
       socketStart= ->
         stream.ready()
@@ -59,5 +59,5 @@ define [
         # because we want updates to happen after initial load
         socket.post '/api/v1/subscribe', { user: user.id }
 
-        socket.on "message", messageReceived = (message) ->
+        socket.on 'message', messageReceived = (message) ->
           activity.parseMessage(message.data.data, message.verb)
