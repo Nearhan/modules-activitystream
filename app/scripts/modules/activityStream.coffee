@@ -46,8 +46,8 @@ define [
           if data.status isnt 0
             socket = io.connect(config.activityStreamServiceAPI)
             socket.on 'connect', socketStart
-        error: () ->
-          $('#JS_activitypending').text "Error:  Unable to connect to Activity Stream service"
+        error: (xhr, textStatus) ->
+          stream.error("Error: " + textStatus )
 
       socketStart= ->
         stream.ready()

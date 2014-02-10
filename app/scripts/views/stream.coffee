@@ -30,6 +30,9 @@ define [
     ready: ->
         $(@el).find('#JS_activitypending').remove()
 
+    error: (errmsg) ->
+        $(@el).find('#JS_activitypending').text(errmsg)
+
     addActivity: (activity) ->
       activityModel = new ActivityModel(activity)
       $.when(activityModel.dfd).then($.proxy( () ->
