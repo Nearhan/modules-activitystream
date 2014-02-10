@@ -44,7 +44,6 @@ define [
         complete: (data) ->
           # Init Socket Connection
           if data.status isnt 0
-            console.log data.status
             socket = io.connect(config.activityStreamServiceAPI)
             socket.on 'connect', socketStart
         error: () ->
