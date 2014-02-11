@@ -58,7 +58,7 @@ define [
 
       socketStart= ->
         stream.ready()
-        socket.get user.getAll('FAVORITED'), (data) ->
+        socket.get user.getAll(), (data) ->
           _.each data, stream.addActivity
 
         # Important for this to happen after the GET request
