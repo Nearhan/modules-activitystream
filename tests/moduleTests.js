@@ -1,26 +1,39 @@
-var request = require('request'),
-    url = require('url'),
-    assert = require('assert'),
-    baseUrl = 'http://as.dev.nationalgeographic.com:9365/api',
-    apiVersion = '1';
+var should = require('should'),
+    request = require('request'),
+    async = require('async'),
+    sinon = require('sinon'),
+    baseUrl = 'http://as.dev.nationalgeographic.com:9365/api/v1';
 
-beforeEach(function() {
-    baseUrl = {
-        protocol: 'http',
-        hostname: 'as.dev.nationalgeographic.com',
-        port: 9365,
-        pathname: 'api/v1/'
-    };
-});
-
-describe('Activity Streams Module Base Tests', function() {
-    describe('Check Basic Get Requests', function () {
-        it('Check response for setting auth cookie endpoint', function(done) {
-           var apiUrl = url.format(baseUrl);
-            request(apiUrl, function (err, response, body) {
-                assert.equal(response.statusCode, 200);
-                done();
+function setCookie(cb) {
+    async.waterfall([
+        function(callback) {
+            request.get(baseUrl, function(err, response, body) {
+                if (err) return callback(err);
+                callback(null, body);
             });
+        }
+    ], cb);
+}
+
+describe('Activity Streams Module Endpoint Tests', function() {
+    before(function(done) {
+        sinon
+            .stub(request, 'get')
+            .yields(null, null, JSON.stringify({}));
+        done();
+    });
+
+    after(function(done) {
+        request.get.restore();
+        done();
+    });
+
+    it('can set session auth cookie', function(done) {
+        setCookie(function(err, result) {
+            if (err) return done(err);
+            request.get.called.should.be.equal(true);
+            result.should.not.be.empty;
+            done();
         });
     });
 });
