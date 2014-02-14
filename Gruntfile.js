@@ -38,7 +38,7 @@ module.exports = function (grunt) {
             },
             coffeeTest: {
                 files: ['test/spec/{,*/}*.coffee'],
-                tasks: ['coffee:test']
+                tasks: ['coffee:test', 'test:watch']
             },
             livereload: {
                 options: {
@@ -126,12 +126,16 @@ module.exports = function (grunt) {
                 'test/spec/{,*/}*.js'
             ]
         },
-        mochaTest: {
-            dev: {
-                src: ['tests/**/*.js'],
+        // Mocha testing framework configuration options
+        mocha: {
+            all: {
                 options: {
-                    reporter: 'spec'
-                }
+                    run: true,
+                    urls: ['http://<%= connect.options.hostname %>:<%= connect.test.options.port %>/index.html'],
+                    reporter: 'Spec',
+                    log: true,
+                    logErrors: true
+                },
             }
         },
         coffee: {
@@ -354,7 +358,8 @@ module.exports = function (grunt) {
         'coffee',
         'createDefaultTemplate',
         'handlebars',
-        'mochaTest:dev',
+        'connect:test',
+        'mocha',
         'watch:test'
     ]);
 
