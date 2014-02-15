@@ -12,7 +12,7 @@ root.Feature = (feature, story..., callback) ->
   if not callback?
     callback = story.shift()
   else
-    message += ' [' + story.join(' ') + ']\n' # The web reporter will escape all
+    message += ' [' + story.join(' ') + ']' # The web reporter will escape all
                                             # HTML, so don't try to format it.
   if skip
     describe.skip message, -> it 'skipped'

@@ -16,7 +16,6 @@
     "grunt-contrib-htmlmin": "~0.1.x",
     "grunt-contrib-imagemin": "~0.2.x",
     "grunt-contrib-watch": "~0.5.x",
-    "grunt-contrib-jasmine": "~0.5.x",
     "grunt-usemin": "~0.1.x",
     "grunt-bower-requirejs": "~0.7.x",
     "grunt-requirejs": "~0.4.x",
