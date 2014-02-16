@@ -1,21 +1,23 @@
 require [
-  'handlebars'
+    'handlebars'
 ], (Handlebars) ->
-  'use strict';
+    root = exports ? this
 
-  Handlebars.registerHelper 'toLower', (value) ->
-    value.toLowerCase()
+    'use strict';
 
-  Handlebars.registerHelper 'formatDate', (date) ->
-    mthNames = [
-      "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
-    ]
+    Handlebars.registerHelper 'toLower', (value) ->
+        value.toLowerCase()
 
-    newDate = new Date(date)
-    month = mthNames[newDate.getMonth()]
-    day = newDate.getDate()
-    compiledDate = day + ' ' + month
+    Handlebars.registerHelper 'formatDate', (date) ->
+        mthNames = [
+            "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
+        ]
 
-  Handlebars.registerHelper 'getBadge', (verb) ->
-    switch verb
-      when 'FAVORITED' then 'nationalGeographic_web-heart.png'
+        newDate = new Date(date)
+        month = mthNames[newDate.getMonth()]
+        day = newDate.getDate()
+        compiledDate = day + ' ' + month
+
+    Handlebars.registerHelper 'getBadge', (verb) ->
+        switch verb
+            when 'FAVORITED' then 'nationalGeographic_web-heart.png'

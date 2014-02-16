@@ -1,21 +1,23 @@
 define [
-  'jquery'
-  'underscore'
-  'backbone'
-  'templates'
+    'jquery'
+    'underscore'
+    'backbone'
+    'templates'
 ], ($, _, Backbone, JST) ->
-  class ActivityView extends Backbone.View
-    template: JST['app/scripts/templates/activity.hbs']
+    root = exports ? this
 
-    tagName: 'li'
+    class root.ActivityView extends Backbone.View
+        template: JST['app/scripts/templates/activity.hbs']
 
-    className: 'activitystream-item'
+        tagName: 'li'
 
-    initialize: ->
-        window.activityView = this
-        _.bindAll @
+        className: 'activitystream-item'
 
-    render: ->
-        $(@el).html @template(@model.toJSON())
+        initialize: ->
+            window.activityView = this
+            _.bindAll @
 
-        @
+        render: ->
+            $(@el).html @template(@model.toJSON())
+
+            @

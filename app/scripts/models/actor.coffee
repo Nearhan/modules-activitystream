@@ -1,8 +1,10 @@
 define [
-  'underscore'
-  'backbone'
-  'models/component'
+    'underscore'
+    'backbone'
+    'models/component'
 ], (_, Backbone, ComponentModel) ->
-  'use strict';
+    root = exports ? this
 
-  class ActorModel extends ComponentModel
+    'use strict';
+
+    class root.ActorModel extends ComponentModel

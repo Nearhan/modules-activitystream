@@ -3,7 +3,8 @@ define [
   'backbone'
   'models/activity'
 ], (_, Backbone, ActivityModel) ->
+    root = exports ? this
 
-  class StreamCollection extends Backbone.Collection
-    model: ActivityModel
-    url: '/stream/'
+    class root.StreamCollection extends Backbone.Collection
+        model: ActivityModel
+        url: '/stream/'

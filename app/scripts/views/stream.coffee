@@ -1,47 +1,49 @@
 define [
-  'jquery'
-  'underscore'
-  'backbone'
-  'templates'
-  'collections/stream'
-  'models/activity'
-  'views/activity'
+    'jquery'
+    'underscore'
+    'backbone'
+    'templates'
+    'collections/stream'
+    'models/activity'
+    'views/activity'
 ], ($, _, Backbone, JST, StreamCollection, ActivityModel, ActivityView) ->
-  class StreamView extends Backbone.View
-    template: JST['app/scripts/templates/stream.hbs']
-    el: $ '#JS_activitycontainer'
+    root = exports ? this
 
-    initialize: ->
-        _.bindAll @
+    class root.StreamView extends Backbone.View
+        template: JST['app/scripts/templates/stream.hbs']
+        el: $ '#JS_activitycontainer'
 
-        @collection = new StreamCollection
-        @collection.bind 'add', @appendActivity
+        initialize: ->
+            _.bindAll @
 
-        window.collection = @collection
+            @collection = new StreamCollection
+            @collection.bind 'add', @appendActivity
 
-        @render()
+            window.collection = @collection
 
-    render: ->
-        $(@el).append @template
+            @render()
 
-    page: ->
-        console.log('asked for more items')
+        render: ->
+            $(@el).append @template
 
-    ready: ->
-        $(@el).find('#JS_activitypending').remove()
+        page: ->
+            console.log('asked for more items')
 
-    error: (errmsg) ->
-        $(@el).find('#JS_activitypending').text(errmsg)
+        ready: ->
+            $(@el).find('#JS_activitypending').remove()
 
-    addActivity: (activity) ->
-      activityModel = new ActivityModel(activity)
-      $.when(activityModel.dfd).then($.proxy( () ->
-        @collection.add activityModel
-      , @))
+        error: (errmsg) ->
+            $(@el).find('#JS_activitypending').text(errmsg)
 
-    appendActivity: (activity) ->
-        activity_view = new ActivityView model: activity
-        $(@el).find('#JS_activitystream').append activity_view.render().el
+        addActivity: (activity) ->
+            activityModel = new ActivityModel(activity)
+            $.when(activityModel.dfd).then($.proxy( () ->
+                @collection.add activityModel
+            , @))
 
-    events:
-        'click .activity.show--more': 'page'
+        appendActivity: (activity) ->
+            activity_view = new ActivityView model: activity
+            $(@el).find('#JS_activitystream').append activity_view.render().el
+
+        events:
+            'click .activity.show--more': 'page'

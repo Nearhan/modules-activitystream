@@ -1,25 +1,27 @@
 define [
-  'underscore'
-  'backbone'
-  'config'
+    'underscore'
+    'backbone'
+    'config'
 ], (_, Backbone, config) ->
-  'use strict';
+    root = exports ? this
+    
+    'use strict';
 
-  class ComponentModel extends Backbone.Model
+    class root.ComponentModel extends Backbone.Model
 
-  	initialize: ->
-        @type = @get('data').type
+        initialize: ->
+            @type = @get('data').type
 
-    url: ->
-        return @get('data')[@type + '_api']
+        url: ->
+            return @get('data')[@type + '_api']
 
-    fetch: ->
-      options = {}
-      if config.api[@type]
-        options = config.api[@type]
-      else
-        options.xhrFields = withCredentials: true # Should this be default?
-      Backbone.Model::fetch.call @, options
+        fetch: ->
+            options = {}
+            if config.api[@type]
+                options = config.api[@type]
+            else
+                options.xhrFields = withCredentials: true # Should this be default?
+            Backbone.Model::fetch.call @, options
 
-    # sync: ->
-    #   console.log arguments
+        # sync: ->
+        #   console.log arguments
