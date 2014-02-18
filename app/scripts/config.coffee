@@ -1,6 +1,5 @@
 define [
 ], () ->
-    root = exports ? this
     
     'use strict';
 

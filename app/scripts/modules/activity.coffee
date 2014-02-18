@@ -1,11 +1,10 @@
 define [
     'models/activity',
 ], (ActivityModel) ->
-    root = exports ? this
 
     'use strict';
 
-    class root.Activity
+    class Activity
         constructor: (@stream) ->
 
         parseMessage: (message, verb) ->

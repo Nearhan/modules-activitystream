@@ -3,8 +3,7 @@ define [
     'backbone'
     'models/component'
 ], (_, Backbone, ComponentModel) ->
-    root = exports ? this
 
     'use strict';
 
-    class root.ActorModel extends ComponentModel
+    class ActorModel extends ComponentModel

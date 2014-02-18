@@ -2,11 +2,10 @@ define [
     'underscore'
     'config'
 ], (_, config) ->
-    root = exports ? this
 
     'use strict';
 
-    class root.User
+    class User
 
         constructor: (args) ->
             @type = args.type

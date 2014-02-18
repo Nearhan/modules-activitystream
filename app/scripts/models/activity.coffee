@@ -6,12 +6,10 @@ define [
     'models/verb'
     'models/object'
 ], (_, $, Backbone, ActorModel, VerbModel, ObjectModel) ->
-    
-    root = exports ? this
 
     'use strict';
 
-    class root.ActivityModel extends Backbone.Model
+    class ActivityModel extends Backbone.Model
         # Will have to remove these defaults once we're set up
         dfd: new $.Deferred()
 

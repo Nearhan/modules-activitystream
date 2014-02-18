@@ -3,11 +3,9 @@ define [
     'backbone'
 ], (_, Backbone) ->
 
-    root = exports ? this
-
     'use strict';
 
-    class root.UserModel extends Backbone.Model
+    class UserModel extends Backbone.Model
 
         baseUrl: '/api/v1/'
 

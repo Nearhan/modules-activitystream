@@ -62,7 +62,7 @@ module.exports = function (grunt) {
             },
             test: {
                 files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
-                tasks: ['test']
+                tasks: ['test:true']
             }
         },
         connect: {
@@ -108,6 +108,9 @@ module.exports = function (grunt) {
         open: {
             server: {
                 path: 'http://<%= connect.options.hostname %>:<%= connect.options.port %>'
+            },
+            test: {
+                path: 'http://<%= connect.options.hostname %>:<%= connect.test.options.port %>'
             }
         },
         clean: {
@@ -321,6 +324,11 @@ module.exports = function (grunt) {
         grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
     });
 
+    grunt.registerTask('server', function () {
+        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
+        grunt.task.run(['serve']);
+    });
+
     grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
             return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
@@ -333,6 +341,7 @@ module.exports = function (grunt) {
                 'createDefaultTemplate',
                 'handlebars',
                 'connect:test',
+                'open:test',
                 'watch:livereload'
             ]);
         }
@@ -343,25 +352,31 @@ module.exports = function (grunt) {
             'createDefaultTemplate',
             'handlebars',
             'connect:livereload',
-            'open',
+            'open:server',
             'watch'
         ]);
     });
 
-    grunt.registerTask('server', function () {
-        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-        grunt.task.run(['serve']);
+    grunt.registerTask('test', function (isConnected) {
+        isConnected = Boolean(isConnected);
+        var testTasks = [
+                'clean:server',
+                'coffee',
+                'createDefaultTemplate',
+                'handlebars',
+                'connect:test',
+                'mocha',
+                'watch:test'
+            ];
+            
+        if(!isConnected) {
+            return grunt.task.run(testTasks);
+        } else {
+            // already connected so not going to connect again, remove the connect:test task
+            testTasks.splice(testTasks.indexOf('connect:test'), 1);
+            return grunt.task.run(testTasks);
+        }
     });
-
-    grunt.registerTask('test', [
-        'clean:server',
-        'coffee',
-        'createDefaultTemplate',
-        'handlebars',
-        'connect:test',
-        'mocha',
-        'watch:test'
-    ]);
 
     grunt.registerTask('build', [
         'clean:dist',

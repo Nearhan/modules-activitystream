@@ -3,11 +3,10 @@ define [
     'backbone'
     'config'
 ], (_, Backbone, config) ->
-    root = exports ? this
     
     'use strict';
 
-    class root.ComponentModel extends Backbone.Model
+    class ComponentModel extends Backbone.Model
 
         initialize: ->
             @type = @get('data').type

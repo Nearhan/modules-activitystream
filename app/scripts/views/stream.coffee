@@ -7,14 +7,13 @@ define [
     'models/activity'
     'views/activity'
 ], ($, _, Backbone, JST, StreamCollection, ActivityModel, ActivityView) ->
-    root = exports ? this
 
-    class root.StreamView extends Backbone.View
+    class StreamView extends Backbone.View
         template: JST['app/scripts/templates/stream.hbs']
         el: $ '#JS_activitycontainer'
 
         initialize: ->
-            _.bindAll @
+            _.bindAll @, 'render', 'page', 'ready', 'error', 'addActivity', 'appendActivity'
 
             @collection = new StreamCollection
             @collection.bind 'add', @appendActivity

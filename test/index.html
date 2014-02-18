@@ -4,19 +4,19 @@
         <meta http-equiv="Content-Type" content="text/html">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Mocha Spec Runner</title>
-        <link rel="stylesheet" href="lib/mocha/mocha.css">
+        <link rel="stylesheet" href="bower_components/mocha/mocha.css">
 
         <!-- Javascript Test Libraries -->
-        <script src="lib/mocha/mocha.js"></script>
-        <script src="lib/chai.js"></script>
-        <script src="lib/sinon.js"></script>
+        <script src="bower_components/mocha/mocha.js"></script>
+        <script src="bower_components/chai/chai.js"></script>
+        <script src="bower_components/sinon/lib/sinon.js"></script>
         <script src="spec/mocha-cakes.js"></script>
 
         <!-- Javascript Core Libraries -->
-        <script src="lib/underscore.js"></script>
-        <script src="lib/handlebars.js"></script>
-        <script src="lib/jquery.js"></script>
-        <script src="lib/backbone.js"></script>
+        <script src="bower_components/underscore/underscore.js"></script>
+        <script src="bower_components/handlebars/handlebars.js"></script>
+        <script src="bower_components/jquery/jquery.js"></script>
+        <script src="bower_components/backbone/backbone.js"></script>
         <script src="lib/socket.io.js"></script>
         <script src="lib/sails.io.js"></script>
 
@@ -29,7 +29,7 @@
         
         <!-- Javascript Application Libraries -->
         <script src="spec/utils.js"></script>
-        <script data-main="scripts/main.js" src="lib/require.js"></script>       
+        <script data-main="scripts/main.js" src="bower_components/requirejs/require.js"></script>       
         
         <!-- Spec Files -->
         <script src="spec/load.js"></script>
@@ -46,3 +46,4 @@
         <script>mocha.run();</script>
     </body>
 </html>
+

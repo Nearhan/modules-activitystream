@@ -1,7 +1,6 @@
 require [
     'handlebars'
 ], (Handlebars) ->
-    root = exports ? this
 
     'use strict';
 

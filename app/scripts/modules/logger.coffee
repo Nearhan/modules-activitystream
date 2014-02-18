@@ -1,9 +1,8 @@
 define [
 ], () ->
-    root = exports ? this
 
     'use strict';
 
-    class root.Logger
+    class Logger
         log: ->
             console.log.apply console, arguments  if typeof console isnt "undefined"

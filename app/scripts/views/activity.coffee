@@ -4,9 +4,8 @@ define [
     'backbone'
     'templates'
 ], ($, _, Backbone, JST) ->
-    root = exports ? this
 
-    class root.ActivityView extends Backbone.View
+    class ActivityView extends Backbone.View
         template: JST['app/scripts/templates/activity.hbs']
 
         tagName: 'li'
@@ -15,7 +14,7 @@ define [
 
         initialize: ->
             window.activityView = this
-            _.bindAll @
+            _.bindAll @, 'render'
 
         render: ->
             $(@el).html @template(@model.toJSON())

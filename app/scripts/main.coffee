@@ -1,5 +1,4 @@
 #/*global require*/
-root = exports ? this
 
 'use strict'
 

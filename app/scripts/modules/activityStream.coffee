@@ -9,18 +9,17 @@ define [
     'views/stream'
     'modules/user',
 ], (Backbone, $, _, io, config, Logger, Activity, StreamView, User) ->
-    root = exports ? this
 
     'use strict';
 
-    class root.ActivityStreamModule
+    class ActivityStreamModule
 
         ready: (options) ->
             @user = new User(options.user)
-            init(@user)
+            this.init(@user)
             window.x = @
 
-        init= (user) ->
+        init: (user) ->
             # Base Init that loads our other modules
             logger = new Logger()
 

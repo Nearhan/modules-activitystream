@@ -1,8 +1,0 @@
-test/spec/
-
---require mocha-cakes
---require async
---require request
---require sinon
---reporter spec
---compilers coffee:coffee-script/register
