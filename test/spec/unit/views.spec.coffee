@@ -13,8 +13,7 @@
             StreamView = clone(_StreamView)
             done()
 
-    # Unit tests
-    describe "App.Views", ->
+    describe "App.Views Unit Tests", ->
         it "Activity view can be called/is available", (done) ->
             @activity = new ActivityView()
             expect(@activity).to.be.ok
@@ -24,7 +23,4 @@
             @stream = new StreamView()
             expect(@stream).to.be.ok
             done()
-
-    # Feature tests
-    #
 )()

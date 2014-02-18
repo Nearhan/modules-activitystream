@@ -10,13 +10,9 @@
             StreamCollection = clone(_StreamCollection)
             done()
 
-    # Unit tests
-    describe "App.Collections", ->
+    describe "App.Collections Unit Tests", ->
         it "Stream collection can be called/is available", (done) ->
             @collection = new StreamCollection()
             expect(@collection).to.be.ok
             done()
-
-    # Feature tests
-    #
 )()

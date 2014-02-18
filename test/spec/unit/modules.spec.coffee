@@ -19,8 +19,7 @@
             User = clone(_User)
             done()
 
-    # Unit tests
-    describe "App.Modules", ->
+    describe "App.Modules Unit Tests", ->
         it "Activity module can be called/is available", (done) ->
             @activity = new Activity()
             expect(@activity).to.be.ok
@@ -41,7 +40,4 @@
         #     @user = new User()
         #     expect(@user).to.be.ok
         #     done()
-
-    # Feature tests
-    #
 )()

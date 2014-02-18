@@ -25,11 +25,9 @@
             UserModel = clone(_UserModel)
             VerbModel = clone(_VerbModel)
             done()
-
-    # Unit tests
     # *** These are commented out because they do not work as-is yet ***
 
-    #describe "App.Models", ->
+    #describe "App.Models Unit Tests", ->
         # it "Activity model can be called/is available", (done) ->
         #     @activity = new ActivityModel()
         #     expect(@activity).to.be.ok
@@ -59,8 +57,4 @@
         #     @verb = new VerbModel()
         #     expect(@verb).to.be.ok
         #     done()
-
-
-    # Feature tests
-    #
 )()
