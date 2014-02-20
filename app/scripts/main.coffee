@@ -39,20 +39,23 @@ require [
 ], (Backbone, ActivityStreamModule) ->
     Backbone.history.start()
 
-    window.AS = new ActivityStreamModule()
+    if typeof _TEST_MODE is "undefined"
+        # Not in test mode, initiate the module
+        window.AS = new ActivityStreamModule()
 
-    testUserObj =
-        user:
-            type: 'mmdb_user'
-            id: '1'
+        testUserObj =
+            user:
+                type: 'mmdb_user'
+                id: '1'
 
-    window.AS.ready(testUserObj)
-    # Different socket events will probably have to be handled
-    # in a module that gets instantiated here
-    # socket.on "message", messageReceived = (message) ->
-        # logger.log "New comet message received :: ", message
-        # $.each message.data.object.data, (l, m) ->
-        #   logger.log l, m
-        #   if l is ("yourshot_photo_id")
-        #   hearts = $("#" + m + " i")
-        #   $("a").find(hearts).toggleClass "chosen"
+        window.AS.ready(testUserObj)
+        
+        # Different socket events will probably have to be handled
+        # in a module that gets instantiated here
+        # socket.on "message", messageReceived = (message) ->
+            # logger.log "New comet message received :: ", message
+            # $.each message.data.object.data, (l, m) ->
+            #   logger.log l, m
+            #   if l is ("yourshot_photo_id")
+            #   hearts = $("#" + m + " i")
+            #   $("a").find(hearts).toggleClass "chosen"

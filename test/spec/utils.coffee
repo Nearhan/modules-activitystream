@@ -1,5 +1,14 @@
 'use strict';
 
+# Set global config flag to indicate this is test mode
+@_TEST_MODE = true
+
+# Test user object to use in our tests
+@testUserObj =
+    user:
+        type: 'mmdb_user'
+        id: '1'
+
 # Global function to assess if the DOM is ready
 @ready ?= (fn, context) ->
     fire = ->

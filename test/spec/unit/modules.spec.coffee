@@ -6,7 +6,7 @@
     Logger = undefined
     User = undefined
 
-    beforeEach (done) ->
+    before (done) ->
         require [
             "modules/activity",
             "modules/activityStream",
@@ -20,24 +20,28 @@
             done()
 
     describe "App.Modules Unit Tests", ->
-        it "Activity module can be called/is available", (done) ->
-            @activity = new Activity()
-            expect(@activity).to.be.ok
-            done()
+        describe "Activity Module", ->
+            it "Can create a new instance of an Activity module", (done) ->
+                @activity = new Activity()
+                expect(@activity).to.be.ok
+                done()
 
-        it "ActivityStreamModule module can be called/is available", (done) ->
-            @activityStream = new ActivityStreamModule()
-            expect(@activityStream).to.be.ok
-            done()
+        describe "ActivityStreamModule Module", ->
+            it "Can create a new instance of an ActivityStreamModule module", (done) ->
+                @activityStream = new ActivityStreamModule()
+                expect(@activityStream).to.be.ok
+                expect(@activityStream).to.be.an("object")
+                done()
 
-        it "Logger module can be called/is available", (done) ->
-            @logger = new Logger()
-            expect(@logger).to.be.ok
-            done()
+        describe "Logger Module", ->
+            it "Can create a new instance of a Logger module", (done) ->
+                @logger = new Logger()
+                expect(@logger).to.be.ok
+                done()
 
-        # Commenting out User Module test for now
-        # it "User module can be called/is available", (done) ->
-        #     @user = new User()
-        #     expect(@user).to.be.ok
-        #     done()
+        describe "User Module", ->
+            it "Can create a new instance of a User module", (done) ->
+                @user = new User('mmdb_user', '1')
+                expect(@user).to.be.ok
+                done()
 )()

@@ -8,7 +8,7 @@
     UserModel = undefined
     VerbModel = undefined
 
-    beforeEach (done) ->
+    before (done) ->
         require [
             "models/activity",
             "models/actor",
@@ -28,32 +28,32 @@
     # *** These are commented out because they do not work as-is yet ***
 
     #describe "App.Models Unit Tests", ->
-        # it "Activity model can be called/is available", (done) ->
+        # it "Can create a new instance of a Activity model", (done) ->
         #     @activity = new ActivityModel()
         #     expect(@activity).to.be.ok
         #     done()
 
-        # it "Actor model can be called/is available", (done) ->
+        # it "Can create a new instance of a Actor model", (done) ->
         #     @actor = new ActorModel()
         #     expect(@actor).to.be.ok
         #     done()
 
-        # it "Component model can be called/is available", (done) ->
+        # it "Can create a new instance of a Component model", (done) ->
         #     @component = new ComponentModel()
         #     expect(@component).to.be.ok
         #     done()
 
-        # it "Object model can be called/is available", (done) ->
+        # it "Can create a new instance of a Object model", (done) ->
         #     @object = new ObjectModel()
         #     expect(@object).to.be.ok
         #     done()
 
-        # it "User model can be called/is available", (done) ->
+        # it "Can create a new instance of a User model", (done) ->
         #     @user = new UserModel()
         #     expect(@user).to.be.ok
         #     done()
 
-        # it "Verb model can be called/is available", (done) ->
+        # it "Can create a new instance of a Verb model", (done) ->
         #     @verb = new VerbModel()
         #     expect(@verb).to.be.ok
         #     done()

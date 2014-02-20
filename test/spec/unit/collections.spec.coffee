@@ -3,7 +3,7 @@
 
     StreamCollection = undefined
 
-    beforeEach (done) ->
+    before (done) ->
         require [
             "collections/stream"
         ],(_StreamCollection) ->
@@ -11,7 +11,7 @@
             done()
 
     describe "App.Collections Unit Tests", ->
-        it "Stream collection can be called/is available", (done) ->
+        it "Can create a new instance of a Stream collection", (done) ->
             @collection = new StreamCollection()
             expect(@collection).to.be.ok
             done()

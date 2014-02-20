@@ -10,9 +10,11 @@ define [
     'modules/user',
 ], (Backbone, $, _, io, config, Logger, Activity, StreamView, User) ->
 
-    'use strict';
+    'use strict'
 
     class ActivityStreamModule
+        socket = undefined
+        stream = undefined
 
         ready: (options) ->
             @user = new User(options.user)
@@ -29,8 +31,12 @@ define [
             # Activity Module Init
             activity = new Activity(stream)
 
-            socket = {}
+            socket = {}  
 
+            this.setAuth config.activityStreamServiceAPI + 'api/v1', user
+            
+
+        setAuth: (url, user) ->
             # Establish/reinit a session cookie with the Activity Streams server
             # Without sending an empty JSONP call to the AS server, we won't get
             # an authentication cookie that will allow us to establish the socket.
@@ -43,28 +49,30 @@ define [
             # Otherwise, the calls on the Service end would need to be converted to res.jsonp().
             # JSONP has some security issues that we don't want to expose on the 
             # Service side.  See http://stackoverflow.com/questions/613962/is-jsonp-safe-to-use
-      
+            createSocket = this.createSocket
+            
             $.ajax
-                url: config.activityStreamServiceAPI + 'api/v1'
+                url: url
                 dataType: 'jsonp'
                 timeout: 12000
                 cache: false
-                complete: (data) ->
-                    # Init Socket Connection
-                    if data.status isnt 0
-                        socket = io.connect(config.activityStreamServiceAPI)
-                        socket.on 'connect', socketStart
+                success: (data) ->
+                    createSocket user
                 error: (xhr, textStatus) ->
                     stream.error("Error: " + textStatus )
 
-            socketStart= ->
-                stream.ready()
-                socket.get user.getAll(), (data) ->
-                    _.each data, stream.addActivity
+        createSocket: (user) ->
+            socket = io.connect(config.activityStreamServiceAPI)
+            socket.on 'connect', socketStart user
 
-                # Important for this to happen after the GET request
-                # because we want updates to happen after initial load
-                socket.post '/api/v1/subscribe', { user: user.id }
+        socketStart= (user) ->
+            stream.ready()
+            socket.get user.getAll(), (data) ->
+                _.each data, stream.addActivity
 
-                socket.on 'message', messageReceived = (message) ->
-                    activity.parseMessage(message.data.data, message.verb)
+            # Important for this to happen after the GET request
+            # because we want updates to happen after initial load
+            socket.post '/api/v1/subscribe', { user: user.id }
+
+            socket.on 'message', messageReceived = (message) ->
+                activity.parseMessage(message.data.data, message.verb)
