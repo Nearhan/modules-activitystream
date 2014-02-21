@@ -4,6 +4,6 @@ define [
   'models/activity'
 ], (_, Backbone, ActivityModel) ->
 
-  class StreamCollection extends Backbone.Collection
-    model: ActivityModel
-    url: '/stream/'
+    class StreamCollection extends Backbone.Collection
+        model: ActivityModel
+        url: '/stream/'

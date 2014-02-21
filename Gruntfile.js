@@ -38,7 +38,7 @@ module.exports = function (grunt) {
             },
             coffeeTest: {
                 files: ['test/spec/{,*/}*.coffee'],
-                tasks: ['coffee:test']
+                tasks: ['coffee:test', 'test:watch']
             },
             livereload: {
                 options: {
@@ -62,14 +62,14 @@ module.exports = function (grunt) {
             },
             test: {
                 files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
-                tasks: ['test']
+                tasks: ['test:true']
             }
         },
         connect: {
             options: {
                 port: SERVER_PORT,
                 // change this to '0.0.0.0' to access the server from outside
-                hostname: 'as.nationalgeographic.com'
+                hostname: 'localhost'
             },
             livereload: {
                 options: {
@@ -108,6 +108,9 @@ module.exports = function (grunt) {
         open: {
             server: {
                 path: 'http://<%= connect.options.hostname %>:<%= connect.options.port %>'
+            },
+            test: {
+                path: 'http://<%= connect.options.hostname %>:<%= connect.test.options.port %>'
             }
         },
         clean: {
@@ -126,19 +129,16 @@ module.exports = function (grunt) {
                 'test/spec/{,*/}*.js'
             ]
         },
-        jasmine: {
-            all:{
-                src : '/scripts/{,*/}*.js',
+        // Mocha testing framework configuration options
+        mocha: {
+            all: {
                 options: {
-                    keepRunner: true,
-                    specs : 'test/spec/**/*.js',
-                    vendor : [
-                        '<%= yeoman.app %>/bower_components/jquery/jquery.js',
-                        '<%= yeoman.app %>/bower_components/underscore/underscore.js',
-                        '<%= yeoman.app %>/bower_components/backbone/backbone.js',
-                        '.tmp/scripts/templates.js'
-                    ]
-                }
+                    run: true,
+                    urls: ['http://<%= connect.options.hostname %>:<%= connect.test.options.port %>/index.html'],
+                    reporter: 'Spec',
+                    log: true,
+                    logErrors: true
+                },
             }
         },
         coffee: {
@@ -176,7 +176,7 @@ module.exports = function (grunt) {
                         'underscore': '../../app/bower_components/underscore/underscore',
                         'handlebars': '../../app/bower_components/handlebars/handlebars',
                         'backbone': '../../app/bower_components/backbone/backbone',
-                        'io': '../../app/scripts/vendor/socket.io/socket.io',
+                        'io': '../../app/bower_components/socket.io-client/dist/socket.io',
                         'sailsio': '../../app/scripts/vendor/sails.io/sails.io',
                         'models': '../../.tmp/scripts/models',
                         'views': '../../.tmp/scripts/views',
@@ -324,6 +324,11 @@ module.exports = function (grunt) {
         grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
     });
 
+    grunt.registerTask('server', function () {
+        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
+        grunt.task.run(['serve']);
+    });
+
     grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
             return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
@@ -336,6 +341,7 @@ module.exports = function (grunt) {
                 'createDefaultTemplate',
                 'handlebars',
                 'connect:test',
+                'open:test',
                 'watch:livereload'
             ]);
         }
@@ -346,24 +352,31 @@ module.exports = function (grunt) {
             'createDefaultTemplate',
             'handlebars',
             'connect:livereload',
-            'open',
+            'open:server',
             'watch'
         ]);
     });
 
-    grunt.registerTask('server', function () {
-        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-        grunt.task.run(['serve']);
+    grunt.registerTask('test', function (isConnected) {
+        isConnected = Boolean(isConnected);
+        var testTasks = [
+                'clean:server',
+                'coffee',
+                'createDefaultTemplate',
+                'handlebars',
+                'connect:test',
+                'mocha',
+                'watch:test'
+            ];
+            
+        if(!isConnected) {
+            return grunt.task.run(testTasks);
+        } else {
+            // already connected so not going to connect again, remove the connect:test task
+            testTasks.splice(testTasks.indexOf('connect:test'), 1);
+            return grunt.task.run(testTasks);
+        }
     });
-
-    grunt.registerTask('test', [
-        'clean:server',
-        'coffee',
-        'createDefaultTemplate',
-        'handlebars',
-        'jasmine',
-        'watch:test'
-    ]);
 
     grunt.registerTask('build', [
         'clean:dist',

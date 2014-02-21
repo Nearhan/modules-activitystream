@@ -8,7 +8,8 @@
     "requirejs": "~2.1.x",
     "requirejs-text": "~2.0.x",
     "modernizr": "~2.6.x",
-    "handlebars": "~1.0.x"
+    "handlebars": "~1.0.x",
+    "socket.io-client": "~0.9.16"
   },
   "devDependencies": {
     "font-awesome": "~4.0.3"

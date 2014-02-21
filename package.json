@@ -16,7 +16,6 @@
     "grunt-contrib-htmlmin": "~0.1.x",
     "grunt-contrib-imagemin": "~0.2.x",
     "grunt-contrib-watch": "~0.5.x",
-    "grunt-contrib-jasmine": "~0.5.x",
     "grunt-usemin": "~0.1.x",
     "grunt-bower-requirejs": "~0.7.x",
     "grunt-requirejs": "~0.4.x",
@@ -27,7 +26,12 @@
     "time-grunt": "~0.2.x",
     "jshint-stylish": "~0.1.x",
     "grunt-contrib-compass": "~0.7.0",
-    "grunt-concurrent": "~0.4.2"
+    "grunt-concurrent": "~0.4.2",
+    "sinon": "~1.8.1",
+    "chai": "~1.9.0",
+    "mocha-cakes": "~0.9.0",
+    "grunt-mocha": "~0.4.10",
+    "mocha": "~1.17.1"
   },
   "engines": {
     "node": ">=0.8.0"

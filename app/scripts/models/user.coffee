@@ -1,13 +1,14 @@
 define [
-  'underscore'
-  'backbone'
+    'underscore'
+    'backbone'
 ], (_, Backbone) ->
-  'use strict';
 
-  class UserModel extends Backbone.Model
+    'use strict';
 
-    baseUrl: '/api/v1/'
+    class UserModel extends Backbone.Model
 
-    getAll: (verb_type) ->
-      @baseUrl + @type + '/' + @id + '/' + verb_type
+        baseUrl: '/api/v1/'
+
+        getAll: (verb_type) ->
+            @baseUrl + @type + '/' + @id + '/' + verb_type
 

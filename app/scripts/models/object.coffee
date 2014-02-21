@@ -1,8 +1,9 @@
 define [
-  'underscore'
-  'backbone'
-  'models/component'
+    'underscore'
+    'backbone'
+    'models/component'
 ], (_, Backbone, ComponentModel) ->
-  'use strict';
+    
+    'use strict';
 
-  class ObjectModel extends ComponentModel
+    class ObjectModel extends ComponentModel

@@ -1,24 +1,25 @@
 define [
-	'models/activity',
+    'models/activity',
 ], (ActivityModel) ->
-  'use strict';
 
-  class Activity
-  	constructor: (@stream) ->
+    'use strict';
 
-  	parseMessage: (message, verb) ->
-  		switch verb
-  			when 'create' then @create(message)
-  			when 'destroy' then @remove(message)
-  			when 'update' then @update(message)
+    class Activity
+        constructor: (@stream) ->
 
-  	create: (message) ->
-  		activity = new ActivityModel(message.data.data)
-  		@stream.addActivity(activity)
-  		console.log activity
+        parseMessage: (message, verb) ->
+            switch verb
+                when 'create' then @create(message)
+                when 'destroy' then @remove(message)
+                when 'update' then @update(message)
 
-  	remove: (message) ->
-  		console.log message.verb + message.id
+        create: (message) ->
+            activity = new ActivityModel(message.data.data)
+            @stream.addActivity(activity)
+            console.log activity
 
-  	update: (message) ->
-  		console.log message
+        remove: (message) ->
+            console.log message.verb + message.id
+
+        update: (message) ->
+            console.log message
