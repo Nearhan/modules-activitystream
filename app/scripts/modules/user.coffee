@@ -1,6 +1,6 @@
 define [
     'underscore'
-    'config'
+    'modules/config'
 ], (_, config) ->
 
     'use strict';

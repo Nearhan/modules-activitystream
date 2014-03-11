@@ -3,7 +3,7 @@ define [
     'jquery'
     'underscore'
     'sailsio'
-    'config'
+    'modules/config'
     'modules/logger'
     'modules/activity'
     'views/stream'
@@ -12,6 +12,7 @@ define [
 
     'use strict'
 
+    console.log('test', config);
     class ActivityStreamModule
         socket = undefined
         stream = undefined

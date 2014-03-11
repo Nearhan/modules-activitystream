@@ -1,7 +1,7 @@
 define [
     'underscore'
     'backbone'
-    'config'
+    'modules/config'
 ], (_, Backbone, config) ->
     
     'use strict';
