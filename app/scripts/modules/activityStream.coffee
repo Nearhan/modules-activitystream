@@ -12,29 +12,19 @@ define [
 
     'use strict'
 
-    console.log('test', config);
     class ActivityStreamModule
-        socket = undefined
-        stream = undefined
+
+        constructor: ->
+            @logger = new Logger() # Base Init that loads our other modules
+            @stream = new StreamView() # Stream Module Init
+            @activity = new Activity(@stream) # Activity Module Init
 
         ready: (options) ->
             @user = new User(options.user)
-            this.init(@user)
-            window.x = @
+            @init()
 
-        init: (user) ->
-            # Base Init that loads our other modules
-            logger = new Logger()
-
-            # Stream Module Init
-            stream = new StreamView()
-
-            # Activity Module Init
-            activity = new Activity(stream)
-
-            socket = {}  
-
-            this.setAuth config.activityStreamServiceAPI + 'api/v1', user
+        init: () ->
+            @setAuth config.activityStreamServiceAPI + 'api/v1', @user
             
 
         setAuth: (url, user) ->
@@ -50,30 +40,33 @@ define [
             # Otherwise, the calls on the Service end would need to be converted to res.jsonp().
             # JSONP has some security issues that we don't want to expose on the 
             # Service side.  See http://stackoverflow.com/questions/613962/is-jsonp-safe-to-use
-            createSocket = this.createSocket
             
             $.ajax
                 url: url
                 dataType: 'jsonp'
                 timeout: 12000
                 cache: false
-                success: (data) ->
-                    createSocket user
-                error: (xhr, textStatus) ->
-                    stream.error("Error: " + textStatus )
+                success: (data) =>
+                    @createSocket @user
+                error: (xhr, textStatus) =>
+                    @stream.error("Error: " + textStatus )
 
-        createSocket: (user) ->
-            socket = io.connect(config.activityStreamServiceAPI)
-            socket.on 'connect', socketStart user
+        createSocket: () ->
+            @socket = io.connect(config.activityStreamServiceAPI)
+            @socket.on 'connect', => 
+                @socketStart()
 
-        socketStart= (user) ->
-            stream.ready()
-            socket.get user.getAll(), (data) ->
-                _.each data, stream.addActivity
+        socketStart: () ->
+            @stream.ready()
+            @socket.get @user.getAll(), (data) =>
+                if data.status == 404 then throw new Error(data.status)
+                _.each data, (o) =>
+                    if o.items then _.each o.items, @stream.addActivity
+                    else console.log 'User has no items'
 
             # Important for this to happen after the GET request
             # because we want updates to happen after initial load
-            socket.post '/api/v1/subscribe', { user: user.id }
+            @socket.post '/api/v1/subscribe', { user: @user.id }
 
-            socket.on 'message', messageReceived = (message) ->
-                activity.parseMessage(message.data.data, message.verb)
+            @socket.on 'message', messageReceived = (message) ->
+                @activity.parseMessage(message.data.data, message.verb)
