@@ -15,6 +15,7 @@ define [
     class ActivityStreamModule
         socket = undefined
         stream = undefined
+        activity = undefined
 
         ready: (options) ->
             @user = new User(options.user)
@@ -75,4 +76,4 @@ define [
             socket.post '/api/v1/subscribe', { user: user.id }
 
             socket.on 'message', messageReceived = (message) ->
-                activity.parseMessage(message.data.data, message.verb)
+                activity.parseMessage(message, message.verb)

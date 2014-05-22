@@ -22,4 +22,4 @@ define [
             console.log message.verb + message.id
 
         update: (message) ->
-            console.log message
+            console.log message.verb + message.id
