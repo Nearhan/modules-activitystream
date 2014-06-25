@@ -9,7 +9,9 @@
     "requirejs-text": "~2.0.x",
     "modernizr": "~2.6.x",
     "handlebars": "~1.0.x",
-    "socket.io-client": "~0.9.16"
+    "socket.io-client": "~0.9.16",
+    "blanket": "~1.1.5",
+    "grunt-blanket-mocha": "~0.4.1"
   },
   "devDependencies": {
     "font-awesome": "~4.0.3",
