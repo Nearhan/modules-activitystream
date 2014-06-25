@@ -69,7 +69,7 @@ module.exports = function (grunt) {
             options: {
                 port: SERVER_PORT,
                 // change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost'
+                hostname: '0.0.0.0'
             },
             livereload: {
                 options: {
@@ -85,6 +85,7 @@ module.exports = function (grunt) {
             test: {
                 options: {
                     port: 9001,
+                    hostname: '0.0.0.0',
                     middleware: function (connect) {
                         return [
                             lrSnippet,
@@ -317,7 +318,20 @@ module.exports = function (grunt) {
             options: {
                 logConcurrentOutput: true
             }
-        }
+        },
+        blanket_mocha: {
+            all: {
+                options: {
+                    run: true,
+                    urls: ['http://<%= connect.test.options.hostname %>:<%= connect.test.options.port %>/index.html'],
+                    reporter: 'Spec',
+                    log: true,
+                    logErrors: true,
+                    bail: false,
+                    threshold: 80
+                }
+            }
+        },
     });
 
     grunt.registerTask('createDefaultTemplate', function () {
@@ -365,7 +379,7 @@ module.exports = function (grunt) {
                 'createDefaultTemplate',
                 'handlebars',
                 'connect:test',
-                'mocha',
+                'coverage',
                 'watch:test'
             ];
             
@@ -401,4 +415,6 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
+
+    grunt.registerTask('coverage', [ 'blanket_mocha' ]);
 };
