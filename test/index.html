@@ -32,7 +32,7 @@
         
         <!-- Javascript Application Libraries -->
         <script src="spec/utils.js"></script>
-        <script data-main="scripts/main.js" src="bower_components/requirejs/require.js"></script>
+        <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
         
         <!-- Javascript Code Coverage Libraries -->
         <script src="bower_components/blanket/dist/qunit/blanket.js"
@@ -49,21 +49,25 @@
         <div id="mocha"></div>
         
         <script>
-            if (window.PHANTOMJS) {
-                blanket.options("reporter", "bower_components/grunt-blanket-mocha/support/grunt-reporter.js");
-            }
+            require([
+                /** Unit tests **/
+                '../../spec/unit/collections',
+                '../../spec/unit/models',
+                '../../spec/unit/modules',
+                '../../spec/unit/views',
+
+                /** Functional Tests **/
+                'spec/feature/load'
+
+                ], function(){
+                    motcha.run();
+                    if (window.PHANTOMJS) {
+                        blanket.options("reporter", "bower_components/grunt-blanket-mocha/support/grunt-reporter.js");
+                    }
+           });
+            
+            
         </script>
-
-
-        <!-- Unit Tests -->
-        <script src="spec/unit/collections.js"></script>
-        <script src="spec/unit/models.js"></script>
-        <script src="spec/unit/modules.js"></script>
-        <script src="spec/unit/views.js"></script>
-
-        <!-- Functional Tests -->
-        <script src="spec/feature/load.js"></script>
-
     </body>
 </html>
 

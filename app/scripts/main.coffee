@@ -23,11 +23,11 @@ require.config
         blanket:
             exports: 'blanket'
     paths:
-        jquery: '../bower_components/jquery/jquery'
-        backbone: '../bower_components/backbone/backbone'
-        underscore: '../bower_components/underscore/underscore'
-        handlebars: '../bower_components/handlebars/handlebars'
-        io: '../bower_components/socket.io-client/dist/socket.io'
+        jquery: '../../bower_components/jquery/jquery'
+        backbone: '../../bower_components/backbone/backbone'
+        underscore: '../../bower_components/underscore/underscore'
+        handlebars: '../../bower_components/handlebars/handlebars'
+        io: '../../bower_components/socket.io-client/dist/socket.io'
         sailsio: '/scripts/vendor/sails.io/sails.io'
         models: '/scripts/models'
         views: '/scripts/views'

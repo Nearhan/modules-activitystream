@@ -11,7 +11,9 @@
     "handlebars": "~1.0.x",
     "socket.io-client": "~0.9.16",
     "blanket": "~1.1.5",
-    "grunt-blanket-mocha": "~0.4.1"
+    "grunt-blanket-mocha": "~0.4.1",
+    "chai": "~1.9.1",
+    "sinon-chai": "~2.5.0"
   },
   "devDependencies": {
     "font-awesome": "~4.0.3",
