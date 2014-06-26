@@ -35,8 +35,25 @@
         <script data-main="scripts/main.js" src="bower_components/requirejs/require.js"></script>
         
         <!-- Javascript Code Coverage Libraries -->
-        <script src="bower_components/blanket/dist/qunit/blanket.js"></script>
+        <script src="bower_components/blanket/dist/qunit/blanket.js"
+            data-cover-flags="branchTracking"
+            data-cover-only="//scripts/"
+        ></script>
         <script src="bower_components/blanket/src/adapters/mocha-blanket.js"></script>
+
+
+
+    </head>
+    <body>
+        <div id="JS_activitycontainer"></div>
+        <div id="mocha"></div>
+        
+        <script>
+            if (window.PHANTOMJS) {
+                blanket.options("reporter", "bower_components/grunt-blanket-mocha/support/grunt-reporter.js");
+            }
+        </script>
+
 
         <!-- Unit Tests -->
         <script src="spec/unit/collections.js"></script>
@@ -46,18 +63,6 @@
 
         <!-- Functional Tests -->
         <script src="spec/feature/load.js"></script>
-
-    </head>
-    <body>
-        <div id="JS_activitycontainer"></div>
-        <div id="mocha"></div>
-        
-        <script>
-            mocha.run()
-            if (window.PHANTOMJS) {
-                blanket.options("reporter", "bower_components/grunt-blanket-mocha/support/grunt-reporter.js");
-            }
-        </script>
 
     </body>
 </html>
