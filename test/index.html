@@ -28,16 +28,14 @@
             mocha.setup('bdd');
         </script>
         
-        
-        
         <!-- Javascript Application Libraries -->
         <script src="spec/utils.js"></script>
         <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
         
         <!-- Javascript Code Coverage Libraries -->
         <script src="bower_components/blanket/dist/qunit/blanket.js"
-            data-cover-flags="branchTracking"
-            data-cover-only="//scripts/"
+            data-cover-only="['scripts/']"
+            data-cover-never="//(scripts.*(?:bower_components|vendor|spec)\/.*)/"
         ></script>
         <script src="bower_components/blanket/src/adapters/mocha-blanket.js"></script>
 
@@ -57,10 +55,10 @@
                 '../../spec/unit/views',
 
                 /** Functional Tests **/
-                'spec/feature/load'
+                '../../spec/feature/load'
 
                 ], function(){
-                    motcha.run();
+                    mocha.run();
                     if (window.PHANTOMJS) {
                         blanket.options("reporter", "bower_components/grunt-blanket-mocha/support/grunt-reporter.js");
                     }
