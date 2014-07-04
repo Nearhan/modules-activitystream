@@ -1,5 +1,9 @@
-(->
-    "use strict"
+define([
+    "modules/activity",
+    "modules/activityStream",
+    "modules/logger",
+    "modules/user"
+    ],(_Activity, _ActivityStreamModule, _Logger, _User) ->
 
     Activity = undefined
     ActivityStreamModule = undefined
@@ -7,23 +11,22 @@
     User = undefined
 
     before (done) ->
-        require [
-            "modules/activity",
-            "modules/activityStream",
-            "modules/logger",
-            "modules/user"
-        ],(_Activity, _ActivityStreamModule, _Logger, _User) ->
-            Activity = clone(_Activity)
-            ActivityStreamModule = clone(_ActivityStreamModule)
-            Logger = clone(_Logger)
-            User = clone(_User)
-            done()
+        Activity = clone(_Activity)
+        ActivityStreamModule = clone(_ActivityStreamModule)
+        Logger = clone(_Logger)
+        User = clone(_User)
+        done()
 
     describe "App.Modules Unit Tests", ->
         describe "Activity Module", ->
             it "Can create a new instance of an Activity module", (done) ->
                 @activity = new Activity()
                 expect(@activity).to.be.ok
+                done()
+
+            it "Can create a message", (done) ->
+                @activity = new Activity()
+                @activity.parseMessage({id: '1', verb: 'create', data: {data: {}}}, 'create')
                 done()
 
         describe "ActivityStreamModule Module", ->
@@ -44,4 +47,4 @@
                 @user = new User('mmdb_user', '1')
                 expect(@user).to.be.ok
                 done()
-)()
+)
