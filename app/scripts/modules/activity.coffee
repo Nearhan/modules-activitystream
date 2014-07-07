@@ -15,8 +15,8 @@ define [
 
         create: (message) ->
             activity = new ActivityModel(message.data.data)
-            @stream.addActivity(activity)
-            console.log activity
+            @stream.addActivity(message.data.data)
+            #console.log activity
 
         remove: (message) ->
             console.log message.verb + message.id

@@ -1,17 +1,13 @@
-(->
+require [
+    "views/activity",
+    "views/stream"
+    "models/activity"
+],(_ActivityView, _StreamView, _ActivityModel) ->
     "use strict"
 
-    ActivityView = undefined
-    StreamView = undefined
-
-    before (done) ->
-        require [
-            "views/activity",
-            "views/stream"
-        ],(_ActivityView, _StreamView) ->
-            ActivityView = clone(_ActivityView)
-            StreamView = clone(_StreamView)
-            done()
+    ActivityView = clone(_ActivityView)
+    StreamView = clone(_StreamView)
+    ActivityModel = clone(_ActivityModel)
 
     describe "App.Views Unit Tests", ->
         describe "Activity View", ->
@@ -25,4 +21,18 @@
                 @stream = new StreamView()
                 expect(@stream).to.be.ok
                 done()
-)()
+
+            it "Add a new activity model", (done) ->
+                arg =
+                    actor:
+                        data: {type: 'actor'}
+                    verb:
+                        data: {type: 'verb'}
+                    object:
+                        data: {type: 'object'}
+
+                @stream = new StreamView()
+                dfd = @stream.addActivity arg
+
+                expect(dfd).to.be.an('object')
+                done()
