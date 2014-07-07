@@ -7,3 +7,4 @@ define [
     'use strict';
 
     class ActorModel extends ComponentModel
+        url: '#'

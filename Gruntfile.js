@@ -331,7 +331,7 @@ module.exports = function (grunt) {
                     threshold: 80
                 }
             }
-        },
+        }
     });
 
     grunt.registerTask('createDefaultTemplate', function () {
