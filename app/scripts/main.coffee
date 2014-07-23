@@ -38,7 +38,7 @@ require [
     'modules/helpers'
 ], (Backbone, ActivityStreamModule) ->
     Backbone.history.start()
-
+    
     if typeof _TEST_MODE is "undefined"
         # Not in test mode, initiate the module
         window.AS = new ActivityStreamModule()
