@@ -1,15 +1,28 @@
 define [
 	'modules/config'
-	], (config) ->
+], (config) ->
 	'use strict'
 
-	class APIMapper
-		constructor: (map, object) ->
-			throw new Error('Undefined API map') unless config.mapper and config.mapper[map]  
-      @mappedObj = {}
+	class Mapper
+		constructor: (type, object) ->
+			unless config.api[type] and config.api[type].map
+				throw new Error(type+':Undefined API map')
+			@type = type
+			@base = config.api[@type].map
+			@map = @drill object
+			return @map
 
-      for own key, value of object
-          if key of map
-            @mappedObj[map[key]] = value
-      
-      @mappedObj
+		drill: (object) ->
+			obj = {}
+			for own key, value of object
+				if key of @base
+					console.log 'base',@base[key]
+					if typeof @base[key] is 'object'
+						@base = @base[key]
+						obj[key] = @drill object[key]
+					else
+						obj[@base[key]] = value
+			console.log(obj)
+			return obj
+
+			

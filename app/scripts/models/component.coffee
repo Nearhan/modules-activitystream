@@ -4,7 +4,8 @@ define [
     'backbone'
     'modules/config'
     'modules/storage'
-], ($, _, Backbone, config, storage) ->
+    'modules/mapper'
+], ($, _, Backbone, config, storage, Mapper) ->
     
     'use strict';
 
@@ -21,6 +22,8 @@ define [
             options = {}
             # Are we grabbing from localStorage
             store = ( model, resp, options ) ->
+                map = new Mapper(model.type, resp)
+                console.log('map',map)
                 storage.set 'AS/'+model.type+'/'+model.get('data').aid, JSON.stringify resp
 
             success = ( resp ) ->

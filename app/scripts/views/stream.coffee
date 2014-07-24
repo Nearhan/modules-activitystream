@@ -35,7 +35,7 @@ define [
             $(@el).find('#JS_activitypending').text(errmsg)
 
         addActivity: (activity) ->
-            console.log activity
+            # console.log activity
             activityModel = new ActivityModel(activity)
             $.when(activityModel.dfd).then($.proxy( () ->
                 @collection.add activityModel
