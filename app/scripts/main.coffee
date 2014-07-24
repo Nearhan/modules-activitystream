@@ -37,6 +37,7 @@ require [
     'backbone'
     'modules/activityStream'
     'modules/helpers'
+    'modules/storage'
 ], (Backbone, ActivityStreamModule) ->
     Backbone.history.start()
     
