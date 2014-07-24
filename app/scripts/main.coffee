@@ -30,7 +30,8 @@ require.config
         models: '/scripts/models'
         views: '/scripts/views'
         collections: '/scripts/collections'
-        modules: '/scripts/modules'
+        modules: '/scripts/modules',
+        localconfig: '/scripts/localconfig'
 
 require [
     'backbone'
