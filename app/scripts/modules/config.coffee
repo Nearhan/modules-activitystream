@@ -25,10 +25,4 @@ define [
 		defaults:
 			baseUrl: 'as.dev.nationalgeographic.com:9365/api/v1/'
 
-		mapper:
-			yourshot_photo:
-				'small-320' : 'photo'
-				title: 'title'
-
-
 	return new Config().conf

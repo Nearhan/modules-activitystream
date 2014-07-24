@@ -8,11 +8,15 @@ define [
 
     class ComponentModel extends Backbone.Model
 
+        # constructor: (data) ->
+        #     console.log(data)
+
+
         initialize: ->
             @type = @get('data').type
 
         url: ->
-            return @get('data')[@type + '_api']
+            return @get('data').api
 
         fetch: ->
             options = {}
@@ -20,4 +24,6 @@ define [
                 options = config.api[@type]
             else
                 options.xhrFields = withCredentials: true # Should this be default?
+            console.log(options)
+            console.log('trying to grab ', @type)
             Backbone.Model::fetch.call @, options
