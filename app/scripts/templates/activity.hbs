@@ -5,18 +5,20 @@
         </span>
 
         <span class="activitysocial-item">
-            <a href="http://yourshot-uat.nationalgeographic.com{{ object.absolute_url }}"><i class="activitysocial-icon fa fa-comment"></i></a><span class="">{{object.counts.comments}}</span>
+            <a href="#"><i class="activitysocial-icon fa fa-comment"></i></a><span class="">{{object.counts.comments}}</span>
         </span>
     </div>
 
-    <a href="http://yourshot-uat.nationalgeographic.com{{ object.absolute_url }}"><img src="http://yourshot-uat.nationalgeographic.com/{{object.sizes.medium-800}}" class="activityitem-image"></a>
+    <a href="{{ object.url }}"><img src="{{object.image.url_medium}}" class="activityitem-image"></a>
 
     <div class="activitycaption">
-        <img src="/images/{{#getBadge verb.type}}{{verb.type}}{{/getBadge}}" class="activitycaption-badge">
+        <img src="{{verb.image.url}}" class="activitycaption-badge">
 
         <div class="activitycaption-text">
-            <div class="caption"><a href="http://members.nationalgeographic.com/{{ actor.id }}">{{ actor.firstName }} {{ actor.lastName }}</a> {{#toLower verb.type}}{{verb.type}}{{/toLower}} the photo <a href="http://yourshot-uat.nationalgeographic.com{{ object.absolute_url }}">{{ object.title }}</a> by <a href="http://members.nationalgeographic.com/{{ object.owner.id}}/"> {{ object.owner.display_name }}</a></div>
-
+            <div class="caption"><a href="{{actor.url}}">
+                    {{ actor.display_name }}</a> {{#toLower verb.type}} {{/toLower}} the  {{#toLower object.type}} {{/toLower}} <a href="{{ object.url }}">"{{ object.display_name }}"</a>
+                    {{#ifCond verb.type 'UPLOADED' }}to{{else}}on{{/ifCond}}
+                    <a href="{{object.app.url}}">{{object.app.display_name}}</a></div>
             <span class="activitycaption-date date"><i class="activitycaption-timeicon fa fa-clock-o"></i>{{#formatDate verb.data.created}}{{verb.data.created}}{{/formatDate}}</span>
         </div>
     </div>
