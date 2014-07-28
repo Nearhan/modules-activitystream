@@ -17,6 +17,10 @@ require [
         day = newDate.getDate()
         compiledDate = day + ' ' + month
 
+    Handlebars.registerHelper 'getBadge', (verb) ->
+        switch verb
+            when 'FAVORITED' then 'nationalGeographic_web-heart.png'
+
     Handlebars.registerHelper 'ifCond', (v1, v2, options) ->
         if(v1 == v2)
             return options.fn(this);
