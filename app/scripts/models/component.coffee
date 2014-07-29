@@ -23,17 +23,16 @@ define [
             # Are we grabbing from localStorage
             store = ( model, resp, options ) ->
                 map = new Mapper(model.type, resp)
-                console.log('map',map)
-                storage.set 'AS/'+model.type+'/'+model.get('data').aid, JSON.stringify resp
+                storage.set 'AS/'+model.type+'/'+model.get('data').aid, JSON.stringify map
 
             success = ( resp ) ->
-                if not model.set( model.parse( resp, options ), options ) then return false
+                if not model.set( resp ) then return false
                 if options.success then options.success model, resp, options
                 model.trigger 'sync', model, resp, options
 
             if resp = storage.get 'AS/'+@type+'/'+@get('data').aid
                 # assign success callback
-                options.success = store
+                options.success = new Function()
                 resp = JSON.parse resp
                 success resp
                 return new $.Deferred().resolve resp

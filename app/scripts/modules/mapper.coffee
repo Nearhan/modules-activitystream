@@ -3,14 +3,14 @@ define [
 ], (config) ->
 	'use strict'
 
-###
- # The Mapper class returns a flat object based on properties found in another object
- # the properties of the object are defined in a 'map' which gives the mapper the
- # names of the keys and what values to set
- # @param  {String} appname_model An AS spec descriptor of the origin
- # @param  {Object} object The object you would like to map into the flat map
- # @return {Object} map A flattened object
-###
+	###
+	 # The Mapper class returns a flat object based on properties found in another object
+	 # the properties of the object are defined in a 'map' which gives the mapper the
+	 # names of the keys and what values to set
+	 # @param  {String} appname_model An AS spec descriptor of the origin
+	 # @param  {Object} object The object you would like to map into the flat map
+	 # @return {Object} map A flattened object
+	###
 	
 	class Mapper
 		constructor: (type, object) ->
