@@ -1,24 +1,28 @@
 <div class="activityitem">
     <div class="activityitem-social activitysocial social">
         <span class="activitysocial-item">
-            <a href="#"><i class="activitysocial-icon fa fa-heart"></i></a><span>{{object.counts_favorites}}</span>
+            <a href="#"><i class="activitysocial-icon fa fa-heart"></i></a><span>{{object.countsFavorites}}</span>
         </span>
 
         <span class="activitysocial-item">
-            <a href="{{object.url}}"><i class="activitysocial-icon fa fa-comment"></i></a><span class="">{{object.counts_comments}}</span>
+            <a href="{{object.url}}"><i class="activitysocial-icon fa fa-comment"></i></a><span class="">{{object.countsComments}}</span>
         </span>
     </div>
 
-    <a href="{{ object.url }}"><img src="{{object.image_medium}}" class="activityitem-image"></a>
+    <a href="{{ object.url }}"><img src="{{object.imageMedium}}" class="activityitem-image"></a>
 
     <div class="activitycaption">
         <img src="{{#getBadge verb.type}}{{verb.type}}{{/getBadge}}" class="activitycaption-badge">
 
         <div class="activitycaption-text">
             <div class="caption"><a href="{{actor.url}}">
-                    {{ actor.display_name }}</a> {{#toLower verb.type}} {{/toLower}} the  {{#toLower object.type}} {{/toLower}} <a href="{{ object.url }}">"{{ object.display_name }}"</a>
+                    {{ actor.displayName }}</a> {{#toLower verb.type}} {{/toLower}}
+                     {{#if object.type}}
+                        the  {{#toLower object.type}} {{/toLower}}
+                      {{/if}}
+                     <a href="{{ object.url }}">"{{ object.displayName }}"</a>
                     {{#ifCond verb.type 'UPLOADED' }}to{{else}}on{{/ifCond}}
-                    <a href="{{object.app_url}}">{{object.app_name}}</a></div>
+                    <a href="{{object.appUrl}}">{{object.appName}}</a></div>
             <span class="activitycaption-date date"><i class="activitycaption-timeicon fa fa-clock-o"></i>{{#formatDate verb.data.created}}{{verb.data.created}}{{/formatDate}}</span>
         </div>
     </div>
