@@ -13,6 +13,10 @@
         <script src="bower_components/sinon-chai/lib/sinon-chai.js"></script>
         <script src="spec/mocha-cakes.js"></script>
 
+        <!-- code coverage -->
+        <script type="text/javascript" src="lib/blanket.min.js"></script>
+        <script type="text/javascript" src="grunt-blanket-mocha/support/mocha-blanket.js"></script>
+
         <!-- Javascript Core Libraries -->
         <script src="bower_components/underscore/underscore.js"></script>
         <script src="bower_components/handlebars/handlebars.js"></script>
@@ -27,11 +31,11 @@
             var assert = chai.assert;
             mocha.setup('bdd');
         </script>
-        
+
         <!-- Javascript Application Libraries -->
         <script src="spec/utils.js"></script>
-        <script data-main="scripts/main.js" src="bower_components/requirejs/require.js"></script>       
-        
+        <script data-main="scripts/main.js" src="bower_components/requirejs/require.js"></script>
+
         <!-- Unit Tests -->
         <script src="spec/unit/collections.js"></script>
         <script src="spec/unit/models.js"></script>
@@ -45,8 +49,34 @@
     <body>
         <div id="JS_activitycontainer"></div>
         <div id="mocha"></div>
-        
-        <script>mocha.run();</script>
+
+    <!-- Fix Phantom JS and Sinon working togeather -->
+    <script>
+        if (navigator.userAgent.indexOf('PhantomJS') !== -1){
+            window.ProgressEvent = function (type, params) {
+                params = params || {};
+
+                this.lengthComputable = params.lengthComputable || false;
+                this.loaded = params.loaded || 0;
+                this.total = params.total || 0;
+            };
+        }
+    </script>
+
+
+    <!-- Mocha Run! -->
+    <script>
+        mocha.run()
+        if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+         mocha
+            // .globals(['Wombat', 'Apple']) // acceptable globals
+            .run();
+        }
+    </script>
+
+    <script>
+        blanket.options("reporter", "grunt-blanket-mocha/support/grunt-reporter.js");
+    </script>
     </body>
 </html>
 

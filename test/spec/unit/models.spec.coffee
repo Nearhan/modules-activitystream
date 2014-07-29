@@ -14,7 +14,6 @@
             "models/actor",
             "models/component",
             "models/object",
-            "models/user",
             "models/verb"
         ],(_ActivityModel, _ActorModel, _ComponentModel,
             _ObjectModel, _UserModel, _VerbModel) ->
@@ -22,7 +21,6 @@
             ActorModel = clone(_ActorModel)
             ComponentModel = clone(_ComponentModel)
             ObjectModel = clone(_ObjectModel)
-            UserModel = clone(_UserModel)
             VerbModel = clone(_VerbModel)
             done()
     # *** These are commented out because they do not work as-is yet ***

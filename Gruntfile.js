@@ -85,6 +85,7 @@ module.exports = function (grunt) {
             test: {
                 options: {
                     port: 9001,
+                    hostname: 'localhost',
                     middleware: function (connect) {
                         return [
                             lrSnippet,
@@ -317,7 +318,29 @@ module.exports = function (grunt) {
             options: {
                 logConcurrentOutput: true
             }
-        }
+        },
+
+        'blanket_mocha': {
+            options: {
+                run: true,
+                urls: ['http://<%= connect.test.options.hostname %>:<%= connect.test.options.port %>/index.html'],
+                log: true,
+                logErrors: true,
+                bail: false,
+                threshold: 80
+            },
+            ci: {
+                options: {
+                    reporter: 'mocha-cobertura-reporter'
+                },
+                dest: 'reports/cobertura.xml'
+            },
+            dev: {
+                options: {
+                    reporter: 'Spec'
+                }
+            }
+        },
     });
 
     grunt.registerTask('createDefaultTemplate', function () {
@@ -363,11 +386,10 @@ module.exports = function (grunt) {
                 'clean:server',
                 'coffee',
                 'createDefaultTemplate',
-                'handlebars',
-                'connect:test',
-                'mocha',
-                'watch:test'
+                'handlebars'
             ];
+
+        testTasks.push('connect:test', 'coverage:dev','mocha', 'watch:test');
             
         if(!isConnected) {
             return grunt.task.run(testTasks);
@@ -401,4 +423,14 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
+
+
+    grunt.registerTask('coverage', function(target){
+     if(target){
+          grunt.task.run(['blanket_mocha:' + target]);
+      }else{
+          grunt.task.run(['blanket_mocha']);
+      }
+
+    });
 };
