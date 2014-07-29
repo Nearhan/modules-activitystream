@@ -5,7 +5,7 @@ require [
     'use strict';
 
     Handlebars.registerHelper 'toLower', (value) ->
-        value.toLowerCase()
+        value.toLowerCase() if typeof value is 'string'
 
     Handlebars.registerHelper 'formatDate', (date) ->
         mthNames = [
@@ -18,5 +18,9 @@ require [
         compiledDate = day + ' ' + month
 
     Handlebars.registerHelper 'getBadge', (verb) ->
-        switch verb
-            when 'FAVORITED' then 'nationalGeographic_web-heart.png'
+        "images/badges/#{verb}.png"
+
+    Handlebars.registerHelper 'ifCond', (v1, v2, options) ->
+        if(v1 == v2)
+            return options.fn(this);
+        options.inverse(this);

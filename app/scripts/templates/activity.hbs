@@ -1,22 +1,26 @@
 <div class="activityitem">
     <div class="activityitem-social activitysocial social">
         <span class="activitysocial-item">
-            <a href="#"><i class="activitysocial-icon fa fa-heart"></i></a><span>{{object.counts.favorites}}</span>
+            <a href="#"><i class="activitysocial-icon fa fa-heart"></i></a><span>{{object.countsFavorites}}</span>
         </span>
 
         <span class="activitysocial-item">
-            <a href="http://yourshot-uat.nationalgeographic.com{{ object.absolute_url }}"><i class="activitysocial-icon fa fa-comment"></i></a><span class="">{{object.counts.comments}}</span>
+            <a href="{{object.url}}"><i class="activitysocial-icon fa fa-comment"></i></a><span class="">{{object.countsComments}}</span>
         </span>
     </div>
 
-    <a href="http://yourshot-uat.nationalgeographic.com{{ object.absolute_url }}"><img src="http://yourshot-uat.nationalgeographic.com/{{object.sizes.medium-800}}" class="activityitem-image"></a>
+    <a href="{{ object.url }}"><img src="{{object.imageMedium}}" class="activityitem-image"></a>
 
     <div class="activitycaption">
-        <img src="/images/{{#getBadge verb.type}}{{verb.type}}{{/getBadge}}" class="activitycaption-badge">
+        <img src="{{#getBadge verb.type}}{{verb.type}}{{/getBadge}}" class="activitycaption-badge">
 
         <div class="activitycaption-text">
-            <div class="caption"><a href="http://members.nationalgeographic.com/{{ actor.id }}">{{ actor.firstName }} {{ actor.lastName }}</a> {{#toLower verb.type}}{{verb.type}}{{/toLower}} the photo <a href="http://yourshot-uat.nationalgeographic.com{{ object.absolute_url }}">{{ object.title }}</a> by <a href="http://members.nationalgeographic.com/{{ object.owner.id}}/"> {{ object.owner.display_name }}</a></div>
-
+            <div class="caption"><a href="{{actor.url}}">
+                    {{ actor.displayName }}</a> {{#toLower verb.type}} {{/toLower}}
+                    the  {{#toLower object.type}} {{/toLower}}
+                     <a href="{{ object.url }}">"{{ object.displayName }}"</a>
+                    {{#ifCond verb.type 'UPLOADED' }}to{{else}}on{{/ifCond}}
+                    <a href="{{object.appUrl}}">{{object.appName}}</a></div>
             <span class="activitycaption-date date"><i class="activitycaption-timeicon fa fa-clock-o"></i>{{#formatDate verb.data.created}}{{verb.data.created}}{{/formatDate}}</span>
         </div>
     </div>

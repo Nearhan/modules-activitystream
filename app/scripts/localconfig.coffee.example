@@ -1,0 +1,29 @@
+define [
+], () ->
+
+    'use strict';
+
+    # URL to activitystream service (see: https://github.com/natgeo/activitystreams)
+    activityStreamServiceAPI: '//activitystream-service.yoursite.com:9365/'
+
+    # List of APIs (if you have more than 1), to get the full data of each object you want to represent on the module.
+    api:
+
+        # Configure parameters to connect your app.
+        your_object_name_1:
+          data:
+            apikey: '',
+            format: 'json'
+
+          # When using CORS
+          xhrFields:
+            withCredentials: false # should be true when using cross-domains
+
+          # Mappings is a dictionary to set, how the different attributes retrieved by the API of your_object_name_1,
+          # gets transformed into an object that can be represented by modules-activitystream
+          # Format: your_app_attribute:   module_activity_stream_attribute
+          map:
+            title: 'displayName'
+
+        #your_object_name_2:
+        #  ...
