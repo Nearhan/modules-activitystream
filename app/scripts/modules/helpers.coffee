@@ -24,3 +24,9 @@ require [
         if(v1 == v2)
             return options.fn(this);
         options.inverse(this);
+
+    Handlebars.registerHelper 'getModel', (type) ->
+        return type.split('_')[1]
+
+    Handlebars.registerHelper 'getAppName', (type) ->
+        return type.split('_')[0]

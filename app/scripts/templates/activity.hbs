@@ -18,11 +18,11 @@
             <div class="caption"><a href="{{actor.url}}">
                     {{ actor.displayName }}</a> {{#toLower verb.type}} {{/toLower}}
                      {{#if object.type}}
-                        the  {{#toLower object.type}} {{/toLower}}
+                        the  {{#getModel object.data.type }}{{/getModel}}
                       {{/if}}
                      <a href="{{ object.url }}">"{{ object.displayName }}"</a>
                     {{#ifCond verb.type 'UPLOADED' }}to{{else}}on{{/ifCond}}
-                    <a href="{{object.appUrl}}">{{object.appName}}</a></div>
+                    <a href="{{ object.appUrl }}">{{#getAppName object.data.type }}{{/getAppName}}</a></div>
             <span class="activitycaption-date date"><i class="activitycaption-timeicon fa fa-clock-o"></i>{{#formatDate verb.data.created}}{{verb.data.created}}{{/formatDate}}</span>
         </div>
     </div>
