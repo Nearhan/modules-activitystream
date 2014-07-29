@@ -1,0 +1,16 @@
+define [
+], () ->
+
+    'use strict';
+
+    activityStreamServiceAPI: '//activitystream-service.yoursite.com:9365/'
+    api:
+        object1:
+          data:
+            apikey: '',
+            format: 'json'
+          xhrFields:
+            withCredentials: false
+          map:
+            title: 'displayName'
+
