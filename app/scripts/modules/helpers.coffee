@@ -5,7 +5,7 @@ require [
     'use strict';
 
     Handlebars.registerHelper 'toLower', (value) ->
-        value.toLowerCase()
+        value.toLowerCase() if typeof value is 'string'
 
     Handlebars.registerHelper 'formatDate', (date) ->
         mthNames = [
