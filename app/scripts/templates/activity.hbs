@@ -17,9 +17,7 @@
         <div class="activitycaption-text">
             <div class="caption"><a href="{{actor.url}}">
                     {{ actor.displayName }}</a> {{#toLower verb.type}} {{/toLower}}
-                     {{#if object.type}}
-                        the  {{#toLower object.type}} {{/toLower}}
-                      {{/if}}
+                    the  {{#toLower object.type}} {{/toLower}}
                      <a href="{{ object.url }}">"{{ object.displayName }}"</a>
                     {{#ifCond verb.type 'UPLOADED' }}to{{else}}on{{/ifCond}}
                     <a href="{{object.appUrl}}">{{object.appName}}</a></div>
