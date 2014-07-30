@@ -181,7 +181,8 @@ module.exports = function (grunt) {
                         'models': '../../.tmp/scripts/models',
                         'views': '../../.tmp/scripts/views',
                         'collections': '../../.tmp/scripts/collections',
-                        'modules': '../../.tmp/scripts/modules'
+                        'modules': '../../.tmp/scripts/modules',
+                        'localconfig': '../../.tmp/scripts/localconfig'
                     },
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
@@ -317,7 +318,21 @@ module.exports = function (grunt) {
             options: {
                 logConcurrentOutput: true
             }
-        }
+        },
+        buildcontrol: {
+            options: {
+                dir: 'dist',
+                commit: true,
+                push: true,
+                message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+            },
+            dist: {
+                options: {
+                    remote: 'git@github.com:natgeo/modules-activitystream.git',
+                    branch: 'dist'
+                }
+            }
+        },
     });
 
     grunt.registerTask('createDefaultTemplate', function () {
@@ -378,23 +393,29 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('build', [
-        'clean:dist',
-        'coffee',
-        'compass:dist',
-        'createDefaultTemplate',
-        'handlebars',
-        'useminPrepare',
-        'requirejs',
-        'imagemin',
-        'htmlmin',
-        'concat',
-        'cssmin',
-        'uglify',
-        'copy',
-        'rev',
-        'usemin'
-    ]);
+    grunt.registerTask('build', function(target) {
+        grunt.task.run([
+            'clean:dist',
+            'coffee',
+            'compass:dist',
+            'createDefaultTemplate',
+            'handlebars',
+            'useminPrepare',
+            'requirejs',
+            'imagemin',
+            'htmlmin',
+            'concat',
+            'cssmin',
+            'uglify',
+            'copy',
+            // 'rev',
+            'usemin'
+        ]);
+        if (target === 'dist') {
+            grunt.log.warn('Pushing to dist branch on origin.');
+            return grunt.task.run(['buildcontrol:dist']);
+        }
+    });
 
     grunt.registerTask('default', [
         'jshint',
