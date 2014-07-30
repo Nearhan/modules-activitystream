@@ -37,17 +37,21 @@ require [
     'backbone'
     'modules/activityStream'
     'modules/helpers'
-], (Backbone, ActivityStreamModule) ->
+    'modules/storage'
+], (Backbone, ActivityStreamModule, helpers, storage) ->
     Backbone.history.start()
     
-    if typeof _TEST_MODE is "undefined"
+    if typeof _TEST_MODE is "undefined" # not sure what this is
         # Not in test mode, initiate the module
         window.AS = new ActivityStreamModule()
+
+        # settings that an implementing site
+        # would use to instantiate the module
 
         testUserObj =
             user:
                 type: 'mmdb_user'
-                id: '10554734'
+                id: '9918822'
 
         window.AS.ready(testUserObj)
         
