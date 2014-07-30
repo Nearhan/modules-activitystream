@@ -9,17 +9,14 @@
         </span>
     </div>
 
-    <a href="{{ object.url }}"><img src="{{object.imageMedium}}" class="activityitem-image"></a>
+    <a href="{{ object.url }}"><img src="{{ object.imageMedium }}" class="activityitem-image"></a>
 
     <div class="activitycaption">
         <img src="{{#getBadge verb.type}}{{verb.type}}{{/getBadge}}" class="activitycaption-badge">
 
         <div class="activitycaption-text">
             <div class="caption"><a href="{{actor.url}}">
-                    {{ actor.displayName }}</a> {{#toLower verb.type}} {{/toLower}}
-                     {{#if object.type}}
-                        the  {{#getModel object.data.type }}{{/getModel}}
-                      {{/if}}
+                    {{ actor.displayName }}</a> {{#toLower verb.type}} {{/toLower}} the {{#getModel object.data.type }}{{/getModel}}
                      <a href="{{ object.url }}">"{{ object.displayName }}"</a>
                     {{#ifCond verb.type 'UPLOADED' }}to{{else}}on{{/ifCond}}
                     <a href="{{ object.appUrl }}">{{#getAppName object.data.type }}{{/getAppName}}</a></div>

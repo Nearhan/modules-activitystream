@@ -24,10 +24,11 @@ define [
             store = ( model, resp, options ) ->
                 map = new Mapper(model.type, resp)
                 storage.set 'AS/'+model.type+'/'+model.get('data').aid, JSON.stringify map
+                options.success = new Function()
+                success map
 
             success = ( resp ) ->
                 if not model.set( resp ) then return false
-                if options.success then options.success model, resp, options
                 model.trigger 'sync', model, resp, options
 
             if resp = storage.get 'AS/'+@type+'/'+@get('data').aid
