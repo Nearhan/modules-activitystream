@@ -63,6 +63,11 @@ define [
                 _.each data, (o) =>
                     if o.items then _.each o.items, @stream.addActivity
                     else console.log 'User has no items'
+            @socket.get @user.getFollowing(), (data) =>
+                if data.status == 404 then throw new Error(data.status)
+                _.each data, (o) =>
+                    if o.items then _.each o.items, @stream.addActivity
+                    else console.log 'User\'s followed, have no items'
 
             # Important for this to happen after the GET request
             # because we want updates to happen after initial load
