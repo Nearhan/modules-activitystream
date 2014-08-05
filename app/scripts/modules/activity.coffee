@@ -14,7 +14,7 @@ define [
                 when 'update' then @update(message)
 
         create: (message) ->
-            activity = new ActivityModel(message.data.data)
+            activity = new ActivityModel(message)
             @stream.addActivity(activity)
             console.log activity
 
