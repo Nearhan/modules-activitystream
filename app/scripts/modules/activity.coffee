@@ -15,7 +15,6 @@ define [
 
         create: (message) ->
             @stream.addActivity(message)
-            console.log message
 
         remove: (message) ->
             console.log message.verb + message.id
