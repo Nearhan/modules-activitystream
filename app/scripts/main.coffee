@@ -81,7 +81,7 @@ require [
         testUserObj =
             user:
                 type: 'mmdb_user'
-                id: '2'
+                id: '9918822'
 
         window.AS.ready(testUserObj)
         
