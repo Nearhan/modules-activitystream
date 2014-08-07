@@ -20,19 +20,7 @@ $badge-width: 1.3em;
     @include e(badge) {
         position: absolute;
         width: $badge-width;
-        height: $badge-width * 1.32;
-        background-image: url("../../images/badges/FAVORITED.png");
-        background-size: 100% 100%;
-
-        &.FOLLOWED{
-            background-image: url("../../images/badges/FOLLOWED.png");
-            height: $badge-width * 0.925;
-        }
-
-        &.DONATED{
-            background-image: url("../../images/badges/DONATED.png");
-            height: $badge-width * 1.32;
-        }
+        height: auto;
     }
 
     @include e(text) {
