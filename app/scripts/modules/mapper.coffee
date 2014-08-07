@@ -22,7 +22,6 @@ define [
             return @drill object
 
         drill: (object) ->
-            console.log("Asfgadfgadfgafgafgadfg")
             for own key, value of @base
                 obj = object
                 while typeof value is 'object'
