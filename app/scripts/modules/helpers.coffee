@@ -27,6 +27,3 @@ require [
 
     Handlebars.registerHelper 'getAppName', (type) ->
         return type.split('_')[0]
-
-    Handlebars.registerHelper 'getImage', (object) ->
-        return object.imageMedium
