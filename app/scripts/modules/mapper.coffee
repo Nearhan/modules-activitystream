@@ -30,7 +30,6 @@ define [
                     value = value[Object.keys(value)[0]]
                 if typeof value is 'string'
                     if value of obj
-                        console.log(obj[value])
                         @map[key] = obj[value]
                 else if typeof value is 'function'
                     @map[key] = value obj

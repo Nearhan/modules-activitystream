@@ -21,9 +21,13 @@ define [
 
           # Mappings is a dictionary to set, how the different attributes retrieved by the API of your_object_name_1,
           # gets transformed into an object that can be represented by modules-activitystream
-          # Format: your_app_attribute:   module_activity_stream_attribute
+          # Format: module_activity_stream_attribute: your_app_attribute
           map:
-            title: 'displayName'
+            displayName: function(data) {return "Dr. " + data['title'];},
+            id: 'id',
+            url: function(data) {return "//example.com/" + data['slug'];},
+            imageMedium: { avatar: { url: 'medium' } }
+
 
         #your_object_name_2:
         #  ...
