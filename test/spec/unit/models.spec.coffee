@@ -5,7 +5,6 @@
     ActorModel = undefined
     ComponentModel = undefined
     ObjectModel = undefined
-    UserModel = undefined
     VerbModel = undefined
 
     before (done) ->
@@ -14,15 +13,13 @@
             "models/actor",
             "models/component",
             "models/object",
-            "models/user",
             "models/verb"
         ],(_ActivityModel, _ActorModel, _ComponentModel,
-            _ObjectModel, _UserModel, _VerbModel) ->
+            _ObjectModel, _VerbModel) ->
             ActivityModel = clone(_ActivityModel)
             ActorModel = clone(_ActorModel)
             ComponentModel = clone(_ComponentModel)
             ObjectModel = clone(_ObjectModel)
-            UserModel = clone(_UserModel)
             VerbModel = clone(_VerbModel)
             done()
     # *** These are commented out because they do not work as-is yet ***
