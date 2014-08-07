@@ -17,9 +17,6 @@ require [
         day = newDate.getDate()
         compiledDate = day + ' ' + month
 
-    Handlebars.registerHelper 'getBadge', (verb) ->
-        "images/badges/#{verb}.png"
-
     Handlebars.registerHelper 'ifCond', (v1, v2, options) ->
         if(v1 == v2)
             return options.fn(this);
