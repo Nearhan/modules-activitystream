@@ -10,13 +10,11 @@ define [
 
         tagName: 'li'
 
-        className: 'activitystream-item'
-
         initialize: ->
-            window.activityView = this
             _.bindAll @, 'render'
 
         render: ->
+            @className = @className + ' ' + @model.cid
             $(@el).html @template(@model.toJSON())
 
             @
