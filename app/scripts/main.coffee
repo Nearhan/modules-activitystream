@@ -41,36 +41,6 @@ require [
 ], (Backbone, ActivityStreamModule, helpers, storage) ->
     Backbone.history.start()
     
-    # Get/set the value of a nested property
-    _.mixin deep: (obj, key, value) ->
-      keys = key.replace(/\[(["']?)([^\1]+?)\1?\]/g, ".$2").replace(/^\./, "").split(".")
-      root = undefined
-      i = 0
-      n = keys.length
-      
-      # Set deep value
-      if arguments.length > 2
-        root = obj
-        n--
-        while i < n
-          key = keys[i++]
-          obj = obj[key] = (if _.isObject(obj[key]) then obj[key] else {})
-        obj[keys[i]] = value
-        value = root
-      
-      # Get deep value
-      else
-        continue  while (obj = obj[keys[i++]])? and i < n
-        value = (if i < n then undefined else obj)
-      value
-
-    # _.pluckDeep
-    #Return a copy of an object containing all but the blacklisted properties.
-    _.mixin pluckDeep: (obj, key) ->
-        _.map obj, (value) ->
-            _.deep value, key
-
-
     if typeof _TEST_MODE is "undefined" # not sure what this is
         # Not in test mode, initiate the module
         window.AS = new ActivityStreamModule()
