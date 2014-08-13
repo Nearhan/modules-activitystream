@@ -31,5 +31,23 @@
         <!-- build:js scripts/main.js -->
         <script data-main="scripts/config" src="bower_components/requirejs/require.js"></script>
         <!-- endbuild -->
+
+        <script type="text/javascript">
+            requirejs.config({
+                paths: {
+                    ActivityStream: 'main'
+                }
+            });
+
+            require(["ActivityStream"], function(AS){
+                var user = {
+                    user: {
+                        type: 'mmdb_user',
+                        id: 9734900
+                    }
+                }
+                AS.ready(user)
+            });
+        </script>
 </body>
 </html>
