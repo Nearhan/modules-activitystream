@@ -73,11 +73,11 @@ module.exports = function (grunt) {
             },
             livereload: {
                 options: {
-                    middleware: function (connect) {
+                   middleware: function (connect) {
                         return [
                             lrSnippet,
                             mountFolder(connect, '.tmp'),
-                            mountFolder(connect, yeomanConfig.app)
+                           mountFolder(connect, yeomanConfig.app)
                         ];
                     }
                 }
@@ -131,7 +131,7 @@ module.exports = function (grunt) {
         },
         // Mocha testing framework configuration options
         mocha: {
-            all: {
+            ci: {
                 options: {
                     run: true,
                     urls: ['http://<%= connect.options.hostname %>:<%= connect.test.options.port %>/index.html'],
@@ -139,6 +139,27 @@ module.exports = function (grunt) {
                     log: true,
                     logErrors: true
                 },
+            }
+        },
+        blanket_mocha: {
+            options: {
+                run: true,
+                urls: ['http://<%= connect.options.hostname %>:<%= connect.test.options.port %>/index.html'],
+                log: true,
+                logErrors: true,
+                bail: false,
+                threshold: 80
+            },
+            ci: {
+                options: {
+                    reporter: 'mocha-cobertura-reporter'
+                },
+                dest: 'reports/cobertura.xml'
+            },
+            dev: {
+                options: {
+                    reporter: 'Spec'
+                }
             }
         },
         coffee: {
@@ -328,7 +349,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 options: {
-                    remote: 'git@github.com:natgeo/modules-activitystream.git',
+                    remote: 'git@github.com:natgeo/ngs-modules-activitystream.git',
                     branch: 'dist'
                 }
             }
@@ -344,7 +365,7 @@ module.exports = function (grunt) {
         grunt.task.run(['serve']);
     });
 
-    grunt.registerTask('serve', function (target) {
+    grunt.registerTask('serve', function(target) {
         if (target === 'dist') {
             return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
         }
@@ -372,24 +393,26 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('test', function (isConnected) {
-        isConnected = Boolean(isConnected);
-        var testTasks = [
+    grunt.registerTask('test', function(target) {
+        if (target !== 'watch') {
+            grunt.task.run([
                 'clean:server',
                 'coffee',
                 'createDefaultTemplate',
-                'handlebars',
+                'handlebars'
+            ]);
+        }
+
+        if('dev' == target){
+            grunt.task.run([
                 'connect:test',
-                'mocha',
-                'watch:test'
-            ];
-            
-        if(!isConnected) {
-            return grunt.task.run(testTasks);
-        } else {
-            // already connected so not going to connect again, remove the connect:test task
-            testTasks.splice(testTasks.indexOf('connect:test'), 1);
-            return grunt.task.run(testTasks);
+                'coverage:dev'
+            ]);
+        }else{
+            grunt.task.run([
+                'connect:test',
+                'coverage:ci'
+            ]);
         }
     });
 
@@ -422,4 +445,13 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
+
+    grunt.registerTask('coverage', function(target){
+     if(target){
+          grunt.task.run(['blanket_mocha:' + target]);
+      }else{
+          grunt.task.run(['blanket_mocha']);
+      }
+
+    });
 };
